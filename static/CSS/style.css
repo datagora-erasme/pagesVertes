@@ -1,0 +1,98 @@
+*{
+    font-family: 'Eczar', arial;
+    color: #294F8D;
+    font-weight: 600;
+  }
+
+.site-header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 48px 0;
+}
+.site-header{
+    height: 10%;
+    margin-bottom: 1%;
+}
+
+#retourCanographia{
+    max-width: 200px;
+}
+
+#titredePage{
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    font-size: 42px;
+    font-family: 'Eczar';
+}
+
+#map {
+    height: 80%; 
+    width: 90%; 
+    display: block;
+    margin: auto;
+}
+
+#image_popup{
+    width: 50%;
+    display: block;
+    margin: auto;    
+}
+
+#text_popup{
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+    text-align: left;
+}
+
+#charte{
+    height: 70%;
+    position: absolute;
+    right: 0%;
+}
+
+@media screen and (max-width: 1920){
+    
+}
+
+#check{
+    position: fixed;
+    top: 20%;
+    right: 5%;
+    z-index: 1000;
+    background-color: azure;
+}
+
+#check2{
+    position: fixed;
+    top: 30%;
+    right: 5%;
+    z-index: 1000;
+    background-color: azure;
+}
+
+#boutonReinit{
+    position: fixed;
+    top: 15%;
+    right: 5%;
+    z-index: 1000;
+}
+
+#divresult{
+    position: fixed;
+    z-index: 1000;
+    top: 30%;
+    left: 0%;
+    margin-left: 1%;
+    background: azure;
+    width: 30%;
+    height: 50%;
+}
+
+#popup{
+    width: 100%;
+    height: 100%;
+}
+
+h2{
+    text-align: center;
+}

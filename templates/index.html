@@ -1,0 +1,55 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Pages Vertes</title>
+    <script src="static/JS/leaflet.js"> // insertion bibliothèque Leaflet : http://leafletjs.com/ </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="static/CSS/leaflet.css" />
+    <link href='https://fonts.googleapis.com/css?family=Eczar' rel='stylesheet'>
+</head>
+
+<body onload="checkCheckboxesChecked()" id="body">
+  <header id="masthead" class="site-header">
+		<div class="site-header-wrapper">
+			<div class="site-branding">
+				<p class="site-title"><a href="http://canographia.datagora.erasme.org/" rel="home"><img src="http://canographia.datagora.erasme.org/wp-content/themes/canographia/assets/canographia-logo.svg" title="Canographia" alt="Canographia" id="retourCanographia"></a></p>
+			</div>
+    </div>
+      <div id="titredePage">
+        Pages Vertes
+      </div>
+	</header>
+
+  <div>
+    <div id="map"></div>
+    <fieldset id="check">
+      <legend>Signataires ou pas?</legend>
+
+      <div>
+        <input type="checkbox" id="checkboxCharte2" name="checkboxCharte2">
+        <label for="scales">Signataires de la Charte</label>
+      </div>
+  </fieldset>
+
+  <fieldset id="check2">
+    <legend>Elague ta recherche !</legend>
+  <!--La il faudrait ajouter avec le javascript automatiquement les filtres que l'on veut ajouter-->
+
+  </fieldset>
+
+  <input type="button" value="R&eacute;initialiser les filtres" id="boutonReinit">
+  <div id="result"></div>
+  </div>
+
+
+</body>
+
+
+<script>
+    var map = L.map('map').setView([45.757814,4.832011], 13);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+</script>

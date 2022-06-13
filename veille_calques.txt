@@ -1,0 +1,3 @@
+-Filtres :
+	on peut diplay des LayerGroups d'un coup (utile pour les filtres) (LayerGroup Class)
+
