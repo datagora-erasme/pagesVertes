@@ -32,3 +32,5 @@ py app.py
 
 ## update data
 delete the JSON files in the folder geojson (not the folder)
+
+the JSON files will be automatically re-created and updated by running app.py
