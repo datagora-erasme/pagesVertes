@@ -12,6 +12,7 @@ import json
 
 def get_adresse(nom):    
     """Récupérer les adresses des entreprises avec leur SIRET"""
+    
     try:
         headers = {
             'Accept': 'application/json',

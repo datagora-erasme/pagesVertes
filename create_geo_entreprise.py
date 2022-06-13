@@ -6,40 +6,6 @@ Permet de récupérer le geoJSON des acteurs en requêtant l'API entreprises.gou
 import requests
 import json
 
-# nom = "CEREMA"
-
-# headers = {
-#     'Accept': 'application/json',
-#     'Authorization': 'Bearer 19c4a3f5-7c0d-3fa5-b9ce-16844942ea67',
-# }
-
-# params = {
-#     'nombre': '1',
-#     'q': 'denominationUniteLegale:"' + nom + '"~*' + ' OR sigleUniteLegale:"' + nom + '"~*' + ' AND codePostalEtablissement:69*',
-#     'champs': 
-#         'denominationUniteLegale,complementAdresseEtablissement,numeroVoieEtablissement,indiceRepetitionEtablissement,typeVoieEtablissement,libelleVoieEtablissement,codePostalEtablissement,libelleCommuneEtablissement,libelleCommuneEtrangerEtablissement,distributionSpecialeEtablissement,codeCommuneEtablissement',
-#     'masquerValeursNulles': 'true'
-# }
-
-# url = 'https://api.insee.fr/entreprises/sirene/V3/siret'
-# response = requests.get(url, params=params, headers=headers)
-# print('\n', response, '\n')
-# print('\n', response.json(), '\n')
-# try:
-#     print(response.json()["etablissements"][0]["uniteLegale"]["denominationUniteLegale"])
-# except:
-#     pass
-# print('fin')
-
-
-
-
-# """Récupérer l'adresse à partir de la réponse de l'API"""
-# adresse = response.json()['etablissements'][0]['adresseEtablissement']
-
-
-
-
 """API  recherche de'entreprise"""
 
 import gspread
