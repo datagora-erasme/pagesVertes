@@ -101,6 +101,11 @@ acteurs.forEach(acteur => {
           });
           html += '</div>';
           document.getElementById("result").innerHTML = html;
+          // surbrillance du marker
+          if (typeof highlight !== 'undefined'){
+            map.removeLayer(highlight);
+          }
+          highlight = L.circleMarker(currentMarker.getLatLng(), { radius: 15 , opacity: 0, fillColor: "#000000", fillOpacity: .3 }).addTo(map);
         });
       }
     }
@@ -224,6 +229,17 @@ function reinitFilters(){
   });
   checkCheckboxesChecked();
 }
+
+// Gestion de la surbrillance du popup cliqué
+/*
+map.on('popupopen', function(e){
+  e.popup.highlight = L.circleMarker(e.popup.getLatLng(), { radius: 15, opacity: 0, fillColor: "#000000", fillOpacity: .3 }).addTo(map);
+});
+
+map.on('popupclose',function(e) {
+  map.removeLayer(e.popup.highlight);
+});
+*/
 
 /*
 // Permet d'utiliser directement un élément de la bibliothèque Leaflet pour une sorte de checkbox
