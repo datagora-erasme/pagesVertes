@@ -24,7 +24,7 @@ pour géocoder:
 
 
 def get_adresse_entreprise(nom):
-
+    pass
    
 
 def get_adresse_gouv(nom='', adresse=''):

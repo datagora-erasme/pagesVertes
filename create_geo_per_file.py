@@ -12,6 +12,7 @@ import json
 
 def get_adresse(nom):    
     """Récupérer les adresses des entreprises avec leur SIRET"""
+    # documentation : https://api.insee.fr/catalogue/site/themes/wso2/subthemes/insee/pages/item-info.jag?name=Sirene&version=V3&provider=insee
     
     try:
         headers = {
