@@ -17,7 +17,7 @@ def get_adresse(nom):
     try:
         headers = {
             'Accept': 'application/json',
-            'Authorization': 'Bearer 19c4a3f5-7c0d-3fa5-b9ce-16844942ea67',
+            'Authorization': 'Bearer b3a694c9-d39e-3cb6-a4e6-b0246d4faf38',
         }
         
         params = {
@@ -39,6 +39,9 @@ def get_adresse(nom):
         return ''
 
 def create_geo_per_file():
+    
+    print("creating geoJSON per line")
+    
     """Récupération des données de l'API GGdrive"""
     sa = gspread.service_account(filename = "service_account.json")
     sh = sa.open("Copie de Outils sélection des acteurs de la végétalisation")

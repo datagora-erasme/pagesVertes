@@ -16,7 +16,7 @@ import json
 from create_geo_per_file import create_geo_per_file, get_adresse
 from create_mongeo import create_mongeo, maj_csv
 from create_geo_adresse import create_geo_adresse
-from create_geo_entreprise import create_geo_entreprise
+#from create_geo_entreprise import create_geo_entreprise
 
 """plot_geo permet d'envoyer les données geojson au client"""
 def plot_geojson(geo_path):
