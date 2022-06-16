@@ -1,9 +1,13 @@
-*{
-    font-family: 'Eczar', arial;
+*{  
     color: #294F8D;
     font-weight: 600;
   }
 
+body{
+    background-color: #FCE5D2;
+    font-family: 'Open Sans', sans-serif;
+}
+/*
 .site-header-wrapper{
     display: flex;
     justify-content: space-between;
@@ -28,9 +32,8 @@
 
 #map {
     height: 80%; 
-    width: 90%; 
-    display: block;
-    margin: auto;
+    width: 80%; 
+    float: left;
 }
 
 #image_popup{
@@ -50,8 +53,8 @@
     right: 0%;
 }
 
-@media screen and (max-width: 1920){
-    
+#result{
+    display: flex;
 }
 
 #check{
@@ -95,4 +98,160 @@
 
 h2{
     text-align: center;
+}
+*/
+
+/*          Vrai CSS refait         */
+
+#map{
+    width: 80%;
+    height: 80%;
+    float: left;
+}
+
+#masthead{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: fit-content;
+    background-color: white;
+    z-index: 1001;
+    font-family: 'Eczar', arial;
+    padding-bottom: 0.5%;
+    height: 10%;
+}
+
+#masthead::after{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -14px;
+    height: 14px;
+    background: url(./images/rough-x-white.svg) repeat-x transparent;
+}
+
+#titredePage{
+    position: absolute;
+    top: 0;
+    padding-top: 1%;
+    font-size: 50px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 1%;
+}
+
+#logo-site{
+    max-width: 70px;
+    position: fixed;
+    left: 38%;
+    z-index: 1002;
+    top: 0;
+}
+
+#retourCanographia{
+    max-width: 200px;
+    position: fixed;
+    padding-top: 1%;
+    padding-left: 2%;
+}
+
+#result{
+    float: left;
+    width: 20%;
+    height: 80%;
+    background-color: white;
+    padding: auto;
+    text-align: center;
+}
+
+#titreNom{
+    font-size: 30px;
+    font-family: 'Eczar', arial;}
+
+.divDansDiv{
+    margin: auto;
+}
+
+#realBody{
+    position: relative;
+    margin-top: 7%;
+    width: 100%;
+    height: 100%;
+}
+
+
+#check{
+    position: absolute;
+    top: 15%;
+}
+
+#check2{
+    position: absolute;
+    top: 25%;
+}
+
+#boutonReinit{
+    position: absolute;
+    top: 10%;
+}
+
+#searchInput{
+    position: absolute;
+    top: 50%;
+}
+
+.notMap{
+    z-index: 1000;
+    left: 0;
+    position: absolute;
+}
+
+.filtresPopup{
+    border-radius: 10rem;
+    background-color: #BDB246;
+    text-align: center;
+    padding: 5px 15px;
+    margin-bottom: 1px;
+    width: fit-content;
+    font-size: 12px;
+    color: #FFFFFF;
+    font-style: italic;
+}
+
+#footer{
+    position: relative;
+    font-size: 15px;
+    float: left;
+    background-color: #BDB246;
+    width: 100%;
+    height: auto;
+    margin-top: 14px;
+}
+
+.site-footer-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+#footer::after{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -14px;
+    height: 14px;
+    background: url(./images/rough-x-secondary.svg) repeat-x transparent;
+}
+
+#logosFooter{
+    width: 25%;
+    margin: auto;
+}
+
+@media screen and (max-width: 1920){
+    
 }

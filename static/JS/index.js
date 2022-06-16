@@ -3,9 +3,13 @@ const acteurs = data['features'];
 
 
 var myIcon = L.icon({
-  iconUrl: "static/CSS/images/green_icon.png",
-  iconSize: [29, 47],
+  iconUrl: "static/CSS/images/Provenance.png",
+  iconSize: [25, 25],
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -26],
   shadowUrl: 'static/CSS/images/marker-shadow.png',
+  shadowSize: [41, 41],
+  shadowAnchor: [10, 41]
 });
 
 function drawPopup(){
@@ -15,7 +19,7 @@ function drawPopup(){
   html = '<div id="popup">'
   html += "<h2>" + nom + "</h2>";
   this.data["domaines"].forEach(element => {
-    html = html + '<div id="text_popup">' + element + '</div>'; 
+    html = html + '<div id="text_popup" class="filtresPopup">' + element + '</div>'; 
   });
   html += '</div>';
   popup = this.bindPopup(html, maxWidth=10);
@@ -92,14 +96,23 @@ acteurs.forEach(acteur => {
           nom = this.data["Nom de l'acteur"];
           charte = this.data["charte de l'arbre"];
           html = '<div id="divresult">'
-          html += "<h2>" + nom + "</h2>";
+          html += '<h2 id="titreNom">' + nom + "</h2>";
           if (charte.length > 0){
             html = html + '<div id="image_popup">' + '<a href="https://blogs.grandlyon.com/developpementdurable/en-actions/dispositifs-partenariaux/charte-de-larbre/"><img src="' + 'static/CSS/images/chartedelarbre.jpg" id="charte">' +'</img>'+ '</div></a>';
           }
+          //display des datas propres à l'acteur
+          //display du type de structure
+          html += '<h3>Type de structure</h3>'
+          // display des filtres
+          html += "<h3>Expertise :</h3>"
           this.data["domaines"].forEach(element => {
-            html = html + '<div id="text_popup">' + element + '</div>'; 
+            html = html + '<div id="text_popup" class="filtresPopup divDansDiv">' + element + '</div>'; 
           });
           html += '</div>';
+          //display du site Web
+          html += '<h3>Site Web :</h3>'
+          html += '<h3>Téléphone :</h3>'
+          html += '<h3>Certifications et labels :</h3>'
           document.getElementById("result").innerHTML = html;
           // surbrillance du marker
           if (typeof highlight !== 'undefined'){
@@ -124,7 +137,7 @@ htmlFiltres = "";
 domaines.forEach(domaine => {
   htmlFiltres = htmlFiltres + '<div><input type="checkbox" id="'+domaine+'"  name="checkboxDomaine"><label for="scales">' + domaine + '</label></div>'
 });
-fieldset.innerHTML = htmlFiltres;
+fieldset.innerHTML += htmlFiltres;
 
 let checkboxCharte2 = document.getElementById("checkboxCharte2");
 // layerAffiche est le layerGroup (variable, qui contient les points à afficher en fonction des checkboxes)

@@ -44,7 +44,7 @@ def create_geo_per_file():
     
     """Récupération des données de l'API GGdrive"""
     sa = gspread.service_account(filename = "service_account.json")
-    sh = sa.open("Copie de Outils sélection des acteurs de la végétalisation")
+    sh = sa.open("Pages Vertes sheet")      #changer en pagesVertes
     wks = sh.worksheet("Selection_Liste d'acteurs")       #rendre la ligne dynamique (done?)
     
     d = wks.get_all_records()
