@@ -15,7 +15,7 @@ body{
 }
 .site-header{
     height: 10%;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
 }
 
 #retourCanographia{
@@ -119,7 +119,7 @@ h2{
     z-index: 1001;
     font-family: 'Eczar', arial;
     padding-bottom: 0.5%;
-    height: 10%;
+    height: 12%;
 }
 
 #masthead::after{
@@ -141,14 +141,13 @@ h2{
     width: 100%;
     text-align: center;
     padding-bottom: 1%;
+    display: flex;
+    justify-content: center;
 }
 
 #logo-site{
-    max-width: 70px;
-    position: fixed;
-    left: 38%;
+    max-width: 1em;
     z-index: 1002;
-    top: 0;
 }
 
 #retourCanographia{
@@ -167,6 +166,10 @@ h2{
     text-align: center;
 }
 
+#charte{
+    max-width: 50;
+}
+
 #titreNom{
     font-size: 30px;
     font-family: 'Eczar', arial;}
@@ -177,15 +180,15 @@ h2{
 
 #realBody{
     position: relative;
-    margin-top: 7%;
+    margin-top: 8%;
     width: 100%;
-    height: 100%;
+    height: 83%;
 }
 
-
+/*
 #check{
     position: absolute;
-    top: 15%;
+    top: 18%;
 }
 
 #check2{
@@ -195,18 +198,36 @@ h2{
 
 #boutonReinit{
     position: absolute;
-    top: 10%;
+    top: 16%;
 }
 
 #searchInput{
     position: absolute;
     top: 50%;
 }
+*/
+h1{
+    font-family: 'Eczar', arial;
+    text-align: justify;
+    padding: 3%;
+}
 
 .notMap{
     z-index: 1000;
-    left: 0;
-    position: absolute;
+    height: fit-content;
+    width: fit-content;
+    background-color: #FCE5D2;
+    color: #FFFFFF !important;
+}
+
+#divContainer{
+    width: 20%;
+    height: 80%;
+    display: flex;
+    margin-top: 10%;
+    flex-direction: column;
+    align-items: left;
+    color: #FFFFFF;
 }
 
 .filtresPopup{

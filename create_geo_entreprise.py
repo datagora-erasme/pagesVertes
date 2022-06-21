@@ -15,7 +15,7 @@ headers = {
 }
 
 params = {
-    'q': 'Alliade Habitat',
+    'q': 'SCI GASSIE',
     'page': '1',
     'per_page': '1',
 }

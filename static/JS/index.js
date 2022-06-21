@@ -233,6 +233,13 @@ acteurs.forEach(acteur => {
 // Réinitialisation des filtres
 let boutonReinit = document.getElementById("boutonReinit");
 boutonReinit.addEventListener("click", reinitFilters);
+boutonReinit.addEventListener("mouseover", function(){
+  console.log("survol du bouton Reinit");
+  boutonReinit.style.backgroundColor = "#1E3A67";
+});
+boutonReinit.addEventListener("mouseout", function(){
+  boutonReinit.style.backgroundColor = "#BDB246";
+});
 
 function reinitFilters(){
   console.log("Réinitialisation des filtres");

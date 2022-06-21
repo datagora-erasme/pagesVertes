@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="static/CSS/style.css">
     <link rel="stylesheet" type="text/css" href="static/CSS/leaflet.css" />
     <link href='https://fonts.googleapis.com/css?family=Eczar' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="static/CSS/search.css">
 </head>
 
 <body onload="checkCheckboxesChecked()" id="body">
@@ -17,36 +18,52 @@
       <div class="site-branding">
         <p class="site-title"><a href="http://canographia.datagora.erasme.org/" rel="home"><img src="http://canographia.datagora.erasme.org/wp-content/themes/canographia/assets/canographia-logo.svg" title="Canographia" alt="Canographia" id="retourCanographia"></a></p>
       </div>
-      <div class="site-logo">
-        <img src="static/CSS/images/canographia-logo-svg.svg" id="logo-site">
-      </div>
     </div>
       <div id="titredePage">
-        Pages Vertes
+        <div class="site-logo">
+          <img src="static/CSS/images/canographia-logo-svg.svg" id="logo-site">
+        </div>
+        <div>
+          Pages Vertes
+        </div>
       </div>
   </header>
 
   <div id="realBody">
-    <div id="map"></div>
-    <input type="button" value="R&eacute;initialiser les filtres" id="boutonReinit" class="notMap">
-    <div id="searchInput" class="notMap">
-      <input id="input-acteur" type="text" autocomplete="off" value="Adresse ou nom d'acteur">
+    <div id="bandeauIntro">
     </div>
-    <fieldset id="check" class="notMap">
-      <legend>Signataires ou pas?</legend>
+    <div id="map">
+      <div id="divContainer">
+        <div id="boutonReinit" class="notMap button">R&eacute;initialiser les filtres</div>
+        <fieldset id="check" class="notMap">
+          <legend><p>Labels et certifications</p></legend>
+          <div>
+            <input type="checkbox" id="checkboxCharte2" name="checkboxCharte2">
+            <label for="scales">Signataires de la Charte de l'arbre</label>
+          </div>
+        </fieldset>
 
-      <div>
-        <input type="checkbox" id="checkboxCharte2" name="checkboxCharte2">
-        <label for="scales">Signataires de la Charte</label>
+        <fieldset id="check2" class="notMap">
+          <legend><p>Filtrer par activit&eacute;</p></legend>
+        <!--La il faudrait ajouter avec le javascript automatiquement les filtres que l'on veut ajouter-->
+        </fieldset>
+
+        <div id="searchInput" class="notMap">
+
+        </div>
+
       </div>
-  </fieldset>
-
-  <fieldset id="check2" class="notMap">
-    <legend>Elague ta recherche !</legend>
-  <!--La il faudrait ajouter avec le javascript automatiquement les filtres que l'on veut ajouter-->
-  </fieldset>
+    </div>
   <div id="result">
+    <h1>Veuillez s&eacute;lectionner un acteur sur la carte</h1>
+  </div>
 
+  <div id="searchContainer">
+    <form onsubmit="event.preventDefault();" role="search" id="formSearch">
+      <label for="search" id="labelSearch">Search for stuff</label>
+      <input id="search" type="search" placeholder="Search..." autofocus required />
+      <button type="submit" id="buttonSearch">Go</button>    
+    </form>
   </div>
 
   <footer id="footer">
