@@ -5,10 +5,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar&family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="static/CSS/style.css">
     <link rel="stylesheet" type="text/css" href="static/CSS/leaflet.css" />
     <link href='https://fonts.googleapis.com/css?family=Eczar' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="static/CSS/search.css">
+
+    <!-- Chargement du plugin mapbox pour intégrer le fond de carte de canographia -->
+    <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
 </head>
 
 <body onload="checkCheckboxesChecked()" id="body">
@@ -29,68 +34,46 @@
       </div>
   </header>
 
-  <div id="realBody">
     <div id="bandeauIntro">
     </div>
-    <div id="map">
+    <div id="map"></div>
+    <div id="gdDiv">
       <div id="divContainer">
-        <div id="boutonReinit" class="notMap button">R&eacute;initialiser les filtres</div>
-        <fieldset id="check" class="notMap">
-          <legend><p>Labels et certifications</p></legend>
-          <div>
-            <input type="checkbox" id="checkboxCharte2" name="checkboxCharte2">
-            <label for="scales">Signataires de la Charte de l'arbre</label>
+        <div id="check" class="notMap">
+          <button class="LegendeFiltres deroulant"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span> Labels et certifications</button>
+          <div style="display:none;" class="'notMap divCheckbox">
+            <label class="container"><input type="checkbox" id="checkboxCharte2">Signataires de la Charte de l'arbre<span class="checkmark"></span></label>
           </div>
-        </fieldset>
-
-        <fieldset id="check2" class="notMap">
-          <legend><p>Filtrer par activit&eacute;</p></legend>
-        <!--La il faudrait ajouter avec le javascript automatiquement les filtres que l'on veut ajouter-->
-        </fieldset>
-
-        <div id="searchInput" class="notMap">
-
         </div>
 
+        <div id="check2" class="notMap">
+          <button class="LegendeFiltres deroulant"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span> Activit&eacute;</button>
+        <!--La il faudrait ajouter avec le javascript automatiquement les filtres que l'on veut ajouter-->
+        </div>
       </div>
+      <div class="notMap" style="border-bottom: none">
+        <div style="display: flex" id="liensTelechargement">
+          <div id="downloadCSV" class="downloadButton"><div class="telechargement"><img src="static/CSS/images/download_csv.png" alt="download_csv" class="download_picto"></div></div>
+          <div id="downloadPDF" class="downloadButton"><div class="telechargement"><img src="static/CSS/images/download_pdf.png" alt="download_pdf" class="download_picto"></div></div>
+        </div>
+      </div>
+      <div id="reinit">R&eacute;initialiser les filtres</div>
     </div>
-  <div id="result">
-    <h1>Veuillez s&eacute;lectionner un acteur sur la carte</h1>
+  <div id="result" style="display: none;">
+    <!-- <h1 style="font-size: 3vmin; padding: 10%;">S&eacute;lectionner un acteur sur la carte</h1> -->
   </div>
-
-  <div id="searchContainer">
-    <form onsubmit="event.preventDefault();" role="search" id="formSearch">
-      <label for="search" id="labelSearch">Search for stuff</label>
-      <input id="search" type="search" placeholder="Search..." autofocus required />
-      <button type="submit" id="buttonSearch">Go</button>    
-    </form>
-  </div>
-
-  <footer id="footer">
-    <div class="site-footer-wrapper">
-      <img src="./static/CSS/images/footer_acteur_final.png" id="logosFooter">
-    </div>
-  </footer>
-</div>
+<footer id="footer">
+  <img src="./static/CSS/images/footer_acteur_final.png" id="logosFooter">
+</footer>
 </body>
 
 
 <script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWFuZ2Vsb3QiLCJhIjoiY2twbXQ3aXl5MDUzbDJ2cDRtdTJoMjlvbyJ9.XlluG8Wj1k_QsGstSd62xA';
     var map = L.map('map').setView([45.757814,4.832011], 13);
-    /*
-    Autres tuiles
-    https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
-    http://{s}.tile.osm.org/{z}/{x}/{y}.png
-    
-    */
-   /*
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);*/
 
-    var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    var OpenStreetMap_HOT = L.tileLayer('https://api.mapbox.com/styles/v1/aangelot/cl38wmscs000214o6biff2xj0/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
     maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
     });
     OpenStreetMap_HOT.addTo(map);
 </script>

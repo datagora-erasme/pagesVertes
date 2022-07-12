@@ -51,7 +51,7 @@ def plot_geojson(geo_path):
 
         script = script + "</script>"
         html = html + script
-        html += '<script src="static/JS/index.js"></script>'
+        html += '<script src="static/JS/index.js"></script><script src="static/JS/front.js"></script>'
         return html
     
 
@@ -100,6 +100,11 @@ def update():
         return "Mise à jour des données réussie"
     except:
         return "ERREUR de MAJ"
+
+@app.route('/update_adresse', methods=['GET', 'POST'])
+def update_adresse():
+    create_geo_adresse()
+    return "Mise à jour des données adresse réussie"
 
 if __name__ == '__main__':    
     PORT = 8085

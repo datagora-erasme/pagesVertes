@@ -1,3 +1,13 @@
+button, input[type="submit"], input[type="reset"], input[type="button"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
 *{  
     color: #294F8D;
     font-weight: 600;
@@ -6,6 +16,8 @@
 body{
     background-color: #FCE5D2;
     font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 /*
 .site-header-wrapper{
@@ -104,9 +116,10 @@ h2{
 /*          Vrai CSS refait         */
 
 #map{
-    width: 80%;
-    height: 80%;
-    float: left;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 #masthead{
@@ -119,7 +132,7 @@ h2{
     z-index: 1001;
     font-family: 'Eczar', arial;
     padding-bottom: 0.5%;
-    height: 12%;
+    height: 12vh;
 }
 
 #masthead::after{
@@ -128,8 +141,8 @@ h2{
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -14px;
-    height: 14px;
+    bottom: -2vh;
+    height: 2vh;
     background: url(./images/rough-x-white.svg) repeat-x transparent;
 }
 
@@ -143,27 +156,61 @@ h2{
     padding-bottom: 1%;
     display: flex;
     justify-content: center;
+    font-size: 6vmin;
 }
 
 #logo-site{
-    max-width: 1em;
+    max-width: 7vmin;
     z-index: 1002;
 }
 
 #retourCanographia{
-    max-width: 200px;
+    max-width: 20vmin;
     position: fixed;
     padding-top: 1%;
     padding-left: 2%;
+    z-index: 1000;
 }
 
 #result{
-    float: left;
-    width: 20%;
-    height: 80%;
     background-color: white;
-    padding: auto;
+    text-align: left;
+    z-index: 1000;
+    border-radius: 5%;
+    border: 1px solid rgb(196,196,196);
+    position: fixed;
+    margin: auto;
+    margin-right: 1vw;
+    font-size: 1.5vmin;
+    right: 5vw;
+    top: 20vh;
+}
+
+#divresult{
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.dataToDisplay {
+    font-size: calc(15px + 0.5vmin);
     text-align: center;
+}
+
+#headerData {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(196,196,196);
+}
+
+#liensTelechargement{
+    display: flex;
+    align-content: space-between;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
 }
 
 #charte{
@@ -171,11 +218,28 @@ h2{
 }
 
 #titreNom{
-    font-size: 30px;
-    font-family: 'Eczar', arial;}
+    font-size: calc(15px + 1.5vmax);
+    font-family: 'Eczar', arial;
+    line-height: 4vh;
+    text-align: center;
+}
+
+.lienWeb {
+    opacity: 1;
+}
+
+.lienWeb:hover {
+    opacity: 0.75;
+}
+    
 
 .divDansDiv{
     margin: auto;
+}
+
+legend{
+    padding: 3px 6px;
+    border-radius: 50%;
 }
 
 #realBody{
@@ -215,19 +279,26 @@ h1{
 .notMap{
     z-index: 1000;
     height: fit-content;
-    width: fit-content;
-    background-color: #FCE5D2;
-    color: #FFFFFF !important;
+    width: 85%;
+    padding: 1%;
 }
 
 #divContainer{
-    width: 20%;
-    height: 80%;
+    width: 90%;
+    height: fit-content;
     display: flex;
-    margin-top: 10%;
     flex-direction: column;
     align-items: left;
+    z-index: 1001;
     color: #FFFFFF;
+    background-color: rgb(252, 250, 250);
+    border-radius: 5%;
+    border: 1px solid rgb(196,196,196);
+    padding: 1%;
+    overflow: scroll;
+    max-height: 55vh;
+    align-items: center;
+    margin: 3vh;
 }
 
 .filtresPopup{
@@ -235,26 +306,41 @@ h1{
     background-color: #BDB246;
     text-align: center;
     padding: 5px 15px;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
     width: fit-content;
-    font-size: 12px;
     color: #FFFFFF;
     font-style: italic;
+    font-weight: 100;
+}
+
+.iconCharteData {
+    width: 75px;
+    height: 75px;
+}
+
+/*Style du popup à droite*/
+
+h3 {
+    font-weight: 100;
+    opacity: 0.5;
+    font-size: calc(5px + 1vmin);
 }
 
 #footer{
-    position: relative;
+    position: absolute;
+    bottom: 0;
+
     font-size: 15px;
     float: left;
     background-color: #BDB246;
     width: 100%;
-    height: auto;
+    height: 8%;
     margin-top: 14px;
-}
 
-.site-footer-wrapper{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
 }
 
 #footer::after{
@@ -266,6 +352,7 @@ h1{
     top: -14px;
     height: 14px;
     background: url(./images/rough-x-secondary.svg) repeat-x transparent;
+    z-index: 1001;
 }
 
 #logosFooter{
@@ -273,6 +360,272 @@ h1{
     margin: auto;
 }
 
-@media screen and (max-width: 1920){
-    
+/*
+label{
+    border-radius: 10rem;
+    background-color: #BDB246;
+    text-align: center;
+    padding: 6px 6px;
+    width: fit-content;
+    font-size: 12px;
+    color: #FFFFFF;
+    font-style: italic;
+    cursor: pointer;
+}
+*/
+
+/* Style des checkboxes*/
+
+#checkboxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding-left: 2vw;
+}
+
+.divCheckbox {
+    padding-left: 2vw;
+}
+
+.container {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    color: #000000;
+    font-family: 'Pragmatica';
+    font-weight: 200;
+    font-size: 1vmax;
+  
+    opacity: 0.65;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.1vmax;
+    width: 1.1vmax;
+    background-color: #eee;
+    border-radius: 2px;
+    margin-top: 3px;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+  /* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #BDB246;
+}
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+  /* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+.container:hover {
+    opacity: 1;
+}
+
+
+#check{
+    border-bottom: 1px solid rgb(196,196,196);
+}
+
+.svg-inline--fa {
+    display: var(--fa-display, inline-block);
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+}
+
+.deroulant{
+    background-color: transparent;
+    padding: 15px 10px;
+    font-size: 1vmax;
+
+    /*background-color: #FCE5D2;*/
+    border: medium none;
+    opacity: 0.6;
+    transition: all 0.2s ease-in-out 0s;
+    cursor: pointer;
+    text-align: inherit;
+}
+
+.deroulant:hover {opacity: 1}
+
+#boutonReinit{
+    cursor: pointer;
+    border-radius: 3px;
+    align-self: center;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    background-color: #D9D9D9;
+    opacity: 0.75;
+    font-weight: 200;
+
+    transition: opacity 0.1s;
+    color: black;
+
+    z-index: 1000;
+    border-radius: 5%;
+    border: 1px solid rgb(196,196,196);
+    font-size: 15px;
+}
+
+.leaflet-control {
+    position: fixed;
+    top: 80vh;
+}
+
+#gdDiv {
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    position: fixed;
+    top: 20vh;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid rgb(196,196,196);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 1vw;
+}
+
+#reinit {
+    font-weight: 200;
+    font-size: 1vmax;
+    text-decoration: underline;
+    opacity: 0.75;
+    cursor: pointer;
+    margin: 2vh;
+}
+
+#reinit:hover {
+    opacity: 1;
+}
+
+#reinit:active {
+    color: #681da8;
+}
+
+#boutonReinit:active {
+    /*
+    opacity: 1 !important;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) !important;*/
+    -webkit-animation: fadeinout 0.2s linear forwards;
+    animation: fadeinout 0.2s linear forwards;
+}
+
+#boutonReinit:hover {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) !important;
+}
+
+@-webkit-keyframes fadeinout {
+    0%,100% { opacity: 0.75; }
+    50% { opacity: 1; }
+  }
+  
+@keyframes fadeinout {
+    0%,100% { opacity: 0.75; }
+    50% { opacity: 1; }
+}
+.selection {
+
+}
+
+.telechargement {
+    cursor: pointer;
+}
+
+.download_picto {
+    width: 3vmax;
+}
+
+#onMap {
+    position: fixed;
+    top: 12vh;
+    bottom: 8vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media screen and (min-width: 400px) {
+    .container .checkmark::after {
+        left: 0.3vmax;
+        top: 0.1vmax;
+        width: 0.25vmax;
+        height: 0.5vmax;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .deroulant {
+        font-size: calc(15px + 0.5vh);
+    }
+    .container {
+        font-size: calc(15px + 0.5vh);
+    }
+    .checkmark {
+        height: 2vh;
+        width: 2vh;
+    }
+
+    .container .checkmark::after {
+        left: 0.6vh;
+        top: 0.2vh;
+        width: 0.5vh;
+        height: 1vh;
+    }
 }

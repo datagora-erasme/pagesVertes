@@ -12,7 +12,7 @@ def create_geo_adresse():
     """Construction du geoJSON"""
     """Récupération des données de l'API GGdrive"""
     sa = gspread.service_account(filename = "service_account.json")
-    sh = sa.open("Copie de Outils sélection des acteurs de la végétalisation")
+    sh = sa.open("Pages Vertes sheet")
     wks = sh.worksheet("Selection_Liste d'acteurs")       #rendre la ligne dynamique (done?)
     
     d = wks.get_all_records()
@@ -54,19 +54,28 @@ def create_geo_adresse():
                 #response.json() est la réponse au format geoJSON contenant le géocodage de l'acteur
                 response = requests.get('https://api-adresse.data.gouv.fr/search/', params=params)
                 if len(response.json()['features']) > 0:
+                    print(adresse)
                     feature = response.json()['features'][0]
                     
                     ##ajout des données intéressantes
                     feature["properties"]["charte de l'arbre"] = line["Est elle signataire de la charte de l'arbre ?"]
                     feature["properties"]["Nom de l'acteur"] = line["Nom de l'acteur"]
                     feature["properties"]["domaines"] = []
+                    feature["properties"]["adresse"] = adresse
+                    feature["properties"]["Type de structure"] = line["Type de structure"]
+                    feature["properties"]["Site web"] = line["Site web"]
+                    feature["properties"]["Téléphone"] = line["Téléphone"]
                     for domaine in domaines:
                         if len(str(line[domaine])) > 0:
                             feature["properties"]["domaines"].append(domaine)
                     feature["properties"]["couleur"] = couleur
-                    mongeo["features"].append(feature)
+                    if couleur == 'OK':
+                        mongeo["features"].append(feature)
             except:
                 pass
     
     with open('geojson/geo_adresse.json', 'w') as fp:
         json.dump(mongeo, fp)
+
+if __name__ == '__main__':
+    create_geo_adresse()
