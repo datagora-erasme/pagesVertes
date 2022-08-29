@@ -1,18 +1,31 @@
+
+// fonction qui permet de faire un wait pour les animations
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 legendes = Array.from(document.getElementsByClassName('LegendeFiltres'));
 
 console.log("front.js bien chargé")
 
 // Display des filtres à cocher si jamais le truc déroulant est coché 
 legendes.forEach(legende => {
-    legende.addEventListener("click", function(){
+    legende.addEventListener("click", async function(){
         console.log("Légende cliquée");
-        checkboxes = legende.parentNode.children[1];
+        checkboxes = Array.from(legende.parentNode.getElementsByClassName("checkboxes"))[0];
 
-        if (checkboxes.style.display === "none"){
+        if (checkboxes.style.display === 'none'){
+            checkboxes.classList.remove("filtreRemballe");
             checkboxes.style.display = "flex";
+            checkboxes.classList.add("filtreDeroule");
         }
         else{
-            checkboxes.style.display = "none";
+            checkboxes.classList.remove("filtreDeroule");
+            checkboxes.classList.add("filtreRemballe");
+            // mettre une pause ici
+            await sleep(500);
+            checkboxes.style.display = 'none';
         };
     });
 });
@@ -35,13 +48,14 @@ deroulants.forEach(deroulant => {
 });
 
 
+// plutôt à mettre dans index.js
 // Gestion de l'appel à la fonction pour télécharger le CSV
 document.getElementById("downloadCSV").addEventListener("click", function(){
     console.log("Téléchargement du CSV")
     createCSV(getDataCSV());
 });
 
-// mise en surbrillance des icones téléchargement
+// mise en surbrillance des icones téléchargement ==> TODO : nul, faire du CSS
 Array.from(document.getElementsByClassName("telechargement")).forEach(telechar => {
     telechar.addEventListener("mouseover", function(){
         console.log("survol d'une icone");
@@ -57,3 +71,17 @@ Array.from(document.getElementsByClassName("telechargement")).forEach(telechar =
     }
     );
 });
+
+// Animation du result au click sur le marker
+
+function animationOuvertureResult() {
+    result = document.getElementById("result");
+    result.classList.remove("fermetureResult");
+    result.classList.add("ouvertureResult");
+}
+
+function animationFermetureResult() {
+    result =  document.getElementById("result");
+    result.classList.remove("ouvertureResult");
+    result.classList.add("fermetureResult");
+}

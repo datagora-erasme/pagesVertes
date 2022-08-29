@@ -9,15 +9,14 @@
     <link rel="stylesheet" href="static/CSS/style.css">
     <link rel="stylesheet" type="text/css" href="static/CSS/leaflet.css" />
     <link href='https://fonts.googleapis.com/css?family=Eczar' rel='stylesheet'>
-    <link rel="stylesheet" type="text/css" href="static/CSS/search.css">
 
     <!-- Chargement du plugin mapbox pour intégrer le fond de carte de canographia -->
     <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
 </head>
 
-<body onload="checkCheckboxesChecked()" id="body">
-
+<body id="body">
+  <!--
   <header id="masthead" class="site-header">
     <div class="site-header-wrapper">
       <div class="site-branding">
@@ -33,21 +32,40 @@
         </div>
       </div>
   </header>
+-->
 
     <div id="bandeauIntro">
     </div>
     <div id="map"></div>
     <div id="gdDiv">
+      <div id="titreDePage">
+        <img src="static/CSS/images/canographia-logo-svg.svg" id="logo-site">
+        <h1>Pages Vertes</h1>
+      </div>
       <div id="divContainer">
         <div id="check" class="notMap">
-          <button class="LegendeFiltres deroulant"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span> Labels et certifications</button>
-          <div style="display:none;" class="'notMap divCheckbox">
-            <label class="container"><input type="checkbox" id="checkboxCharte2">Signataires de la Charte de l'arbre<span class="checkmark"></span></label>
+          <button class="LegendeFiltres deroulant"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span> Labels et engagements éthiques</button>
+          <div class="checkboxes notMap divCheckbox" style="display: none;">
+            <label class="container"><input type="checkbox" id="checkboxCharte">
+              Signataires de la Charte de l'arbre
+              <img src="static/CSS/images/iconeCharte.png" alt="iconeCharte" id="iconeCharte">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container"><input type="checkbox" id="checkboxVegetalLocal">
+              Vegetal Local
+              <img src="static/CSS/images/iconeCharte.png" alt="iconeCharte" id="iconeCharte">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container"><input type="checkbox" id="checkboxPlanteBleue">
+              Plante Bleue
+              <img src="static/CSS/images/iconeCharte.png" alt="iconeCharte" id="iconeCharte">
+              <span class="checkmark"></span>
+            </label>
           </div>
         </div>
 
         <div id="check2" class="notMap">
-          <button class="LegendeFiltres deroulant"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span> Activit&eacute;</button>
+          <button class="LegendeFiltres deroulant"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span> J'ai besoin de</button>
         <!--La il faudrait ajouter avec le javascript automatiquement les filtres que l'on veut ajouter-->
         </div>
       </div>
@@ -62,10 +80,25 @@
   <div id="result" style="display: none;">
     <!-- <h1 style="font-size: 3vmin; padding: 10%;">S&eacute;lectionner un acteur sur la carte</h1> -->
   </div>
+  <!--
 <footer id="footer">
   <img src="./static/CSS/images/footer_acteur_final.png" id="logosFooter">
 </footer>
 </body>
+-->
+  <div id="search-bar-container">
+    <div class="form-container">
+      <form action="" class="form">
+          <input type="text" name="" id="inputSearchBar" placeholder="search...">
+          <button id="clear" class="clear-results">clear</button>
+      </form>
+    </div>
+    <div class="results-container">
+      <ul class="results-list" id="list">
+
+      </ul>
+    </div>
+  </div>
 
 
 <script>
