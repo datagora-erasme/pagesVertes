@@ -7,6 +7,8 @@ but also to launch an update_data method
 import json
 import codecs
 from flask import Flask
+from flask import request
+from flask import render_template
 import update_data
 
 def plot_data(data_path):
@@ -29,13 +31,11 @@ def plot_data(data_path):
 
     # write the JavaScript into the html to link the data to client
     script = "<script>"
-    script += f"var data = {str(geo_json)};"
+    script += f"const data = {str(geo_json)};"
     script += "</script>"
 
     # Insert the scripts into the HTML
     html += script
-    html += '<script src="static/JS/index.js" defer></script> \n'
-    html += '<script src="static/JS/front.js" defer>/<script>'
 
     return html
 
@@ -50,7 +50,6 @@ def update():
     """ Function that launches the method to update the data """
     update_data.main()
     return "Data Updated"
-
 
 if __name__ == '__main__':
     PORT = 8000

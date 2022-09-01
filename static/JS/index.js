@@ -35,20 +35,22 @@ checkCheckboxesChecked()
 // Ajoute un marker avec la position de l'utilisateur
 drawMaPosition()
 
-// Crée la searchBar
-createSearchBar()
 
 // Gestion des évènements du DOM
+/*
 const boutonReinit = document.getElementById('reinit')
 boutonReinit.addEventListener("click", reinitCheckboxes)
+*/
 const checkboxes = document.querySelectorAll('input[type=checkbox]')
 checkboxes.forEach(checkbox => {
   checkbox.addEventListener('change', checkCheckboxesChecked)
 });
+/*
 document.getElementById("downloadCSV").addEventListener("click", function(){
   console.log("Téléchargement du CSV")
   createCSV(getDataCSV());
 });
+*/
 map.addEventListener('click', animationFermetureResult)
 
 
@@ -138,15 +140,15 @@ function createMarkers(){
  */
 function drawPopup() {
 
-  html = '<div class="popupOnHover">'
-  html += '<h2 class="popupTitle">' + this.data["Nom de l'acteur"] + '</h2>'
+  let htmlPopup = '<div class="popupOnHover">'
+  htmlPopup += '<h2 class="popupTitle">' + this.data["Nom de l'acteur"] + '</h2>'
   domaines.forEach(domaine => {
     if (this.data[domaine]) {
-      html += '<div class="filtresPopup">' + domaine + '</div>'
+      htmlPopup += '<div class="filtresPopup">' + domaine + '</div>'
     }
   });
-  html += '</div>'
-  popup = this.bindPopup(html, maxWidth=10)
+  htmlPopup += '</div>'
+  popup = this.bindPopup(htmlPopup, maxWidth=10)
   popup.openPopup()
 }
 
@@ -167,23 +169,27 @@ function deletePopup() {
  */
 function drawMarkerData() {
 
-  html = '<div id="divresult">'
-  html += '<div id="headerData">'
-  html += '<h2 id="titreNom">'+ this.data["Nom de l'acteur"] +'</h2></div>'
-  html += '</div>'
-
-  html += '<h3>Type de structure</h3>'
-  html += '<p class="dataToDisplay">' + this.data["Type de structure"] + '</p>'
-  html += '<h3>Expertise</h3>'
+  let html = '<div id="titreNomActeurResult">'+ this.data["Nom de l'acteur"] +'</div>'
+  html += '<div class="dataToDisplay" id="structure">' + this.data["Type de structure"] + '</div>'
   domaines.forEach(domaine => {
     if (this.data[domaine]) {
-      html += '<div id="text_popup" class="filtres Popup divDansDiv dataToDisplay">' + domaine + '</div>'
+      html += '<div class="dataToDisplay expertise">' + domaine + '</div>'
     }
   });
-  // TODO : ajouter les coordonnées
-  
+  html += '<div class="coordonnees">'
+  if (this.data["Site web"]) {html += '<a target="_blank" class="dataToDisplay coordonnee" href="' + this.data["Site web"] + '"><iconify-icon icon="mdi:web" width="20" height="20" class="iconCoords"></iconify-icon>Site web</a>'}
+  if (this.data["Email"]){html += '<div class="dataToDisplay coordonnee"><iconify-icon icon="ic:twotone-alternate-email" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Email"] + '</div>'}
+  if (this.data["Téléphone"]){html += '<div class="DataToDisplay coordonnee"><iconify-icon icon="carbon:phone" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Téléphone"] + '</div>'}
+  html += '<div class="dataToDisplay coordonnee"><iconify-icon icon="ep:position" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Adresse"] + '</div>'
+  html += '</div>'
+  html += '<div class="labelsContainer">'
+  if (this.data["Signataire de la Charte de l'Arbre"]) {html += '<img src="static/CSS/images/logo charte arbre.png" alt="logo Charte de l' + "'" + 'Arbre" class="logoLabel">'}
+  if (this.data["Marque végétal local"]) {html += '<img src="static/CSS/images/logo-vegetal-local.png" alt="logo Végétal Local" class="logoLabel" id="logoVegetal">'}
+  if (this.data["Label Plante Bleue"]) {html += '<img src="static/CSS/images/plante_bleue.png" alt="logo Plante Bleue" class="logoLabel">'}
+  html += '</div>'
+  if (this.data["Signataire de la Charte de l'Arbre"]) {html += '<div class="dataToDisplay" id="signataire"><img class="logoLabel" id="feuilleCharte" src="static/CSS/images/iconeCharte.png" alt="logoCharte">Signataire de la charte de l' + "'" + 'arbre</div>'}
   document.getElementById("result").innerHTML = html
-  document.getElementById("result").style.display = "flex"
+  document.getElementById("result").style.display = "block"
 
   // TODO : ajouter la surbrillance du marker
 
@@ -214,9 +220,9 @@ function addCheckboxes () {
   checkboxContainer = document.getElementById("check2")
   htmlFiltres = '<div id="checkboxes" class="checkboxes" style="display: none;">'
   domaines.forEach(domaine => {
-    htmlFiltres += '<div class="checkboxContainer"><label class="container"><input type="checkbox" id="'
+    htmlFiltres += '<label class="checkboxContainer" for="' + domaine + '"><input type="checkbox" id="'
     htmlFiltres += domaine
-    htmlFiltres += '"  name="checkboxDomaine"><span class="checkmark"></span>' + domaine + '</label></div>'
+    htmlFiltres += '"  name="' + domaine + '"><span class="checkmark"></span><div class="checkboxText">' + domaine + '</div></label>'
   });
   htmlFiltres += '</div>'
   checkboxContainer.innerHTML += htmlFiltres
@@ -364,59 +370,12 @@ function drawMaPosition () {
 
 
 /**
- * main function to create and initialize the searchBar
- */
-function createSearchBar () {
-
-  document.querySelector("#inputSearchBar")
-  .addEventListener("input", function (e) {
-    let value = e.target.value
-    if (value && value.trim().length > 0) {
-      value = value.trim().toLowerCase()
-      setList(acteurs.filter(acteur => {
-        return acteur.properties["Nom de l'acteur"].toLowerCase().includes(value)
-      }))
-    } else {
-      clearList()
-    }
-  })
-
-
-  /**
-   * function that creates the list of results used by the search bar in order to
-   * display a result
-   * 
-   * @param {list} results 
-   */
-  function setList (results) {
-    clearList()
-    for (const e of results) {
-      const resultItem = document.createElement('li')
-      resultItem.classList.add('result-item')
-      const text = document.createTextNode(e.properties["Nom de l'acteur"])
-      resultItem.appendChild(text)
-      list.appendChild(resultItem)
-    }
-  }
-
-
-  /**
-   * function that clears the results to display from the searchBar
-   */
-  function clearList () {
-    while (list.firstChild) {
-        list.removeChild(list.firstChild)
-    }
-  }
-}
-
-/**
  * Gestion des animations
  */
 
 // Script principal de gestion des animations
 
-legendes = Array.from(document.getElementsByClassName('LegendeFiltres'));
+legendes = Array.from(document.getElementsByClassName('derouleurCheckboxes'));
 // Display des filtres à cocher si jamais le truc déroulant est coché 
 legendes.forEach(legende => {
     legende.addEventListener("click", async function(){
@@ -432,14 +391,14 @@ legendes.forEach(legende => {
             checkboxesAnim.classList.remove("filtreDeroule");
             checkboxesAnim.classList.add("filtreRemballe");
             // mettre une pause ici
-            await sleep(500);
+            await sleep(200);
             checkboxesAnim.style.display = 'none';
         };
     });
 });
 
 
-deroulants = Array.from(document.getElementsByClassName("deroulant"));
+deroulants = Array.from(document.getElementsByClassName("derouleurCheckboxes"));
 deroulants.forEach(deroulant => {
     deroulant.deroule = false;
     deroulant.addEventListener("click", function(){
@@ -455,6 +414,27 @@ deroulants.forEach(deroulant => {
     });
 });
 
+
+/**
+ * animationOuvertureResult gère l'animation d'ouverture du div de result lors
+ * du click sur un marker
+ */
+function animationOuvertureResult() {
+  result = document.getElementById("result");
+  result.classList.remove("fermetureResult")
+  result.classList.add("ouvertureResult");
+}
+
+/**
+ * animationFermetureResult gère l'animation de fermeture du div de result lors
+ * du click sur la map
+ */
+function animationFermetureResult() {
+  result =  document.getElementById("result");
+  result.classList.remove("ouvertureResult")
+  result.classList.add("fermetureResult");
+}
+
 /**
  * sleep permet de faire un wait pour les animations qui le nécessitent
  * 
@@ -463,19 +443,4 @@ deroulants.forEach(deroulant => {
  */
  function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
-function animationOuvertureResult() {
-  result = document.getElementById("result");
-  result.classList.remove("fermetureResult");
-  result.classList.add("ouvertureResult");
-}
-
-
-function animationFermetureResult() {
-  console.log("animation de fermeture du result")
-  result =  document.getElementById("result");
-  result.classList.remove("ouvertureResult");
-  result.classList.add("fermetureResult");
 }

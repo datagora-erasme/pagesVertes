@@ -1,727 +1,304 @@
-/* CSS for search bar */
-
-.form-container form {
-    position: fixed;
-    top: 7vh;
-    left: 30vw;
-    background-color: white;
-    border-radius: 15px;
-    display: flex;
-}
-
-input[type="submit"], input[type="reset"], input[type="button"] {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
-
-*{  
-    color: #294F8D;
-    font-weight: 600;
-  }
-
-body{
+body {
     background-color: #FCE5D2;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Maitree', sans-serif;
+    font-weight: 400;
     margin: 0;
     padding: 0;
-}
-/*
-.site-header-wrapper{
-    display: flex;
-    justify-content: space-between;
-    padding: 7px 48px 0;
-}
-.site-header{
-    height: 10%;
-    margin-bottom: 2%;
-}
-
-#retourCanographia{
-    max-width: 200px;
-}
-
-#titredePage{
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    font-size: 42px;
-    font-family: 'Eczar';
+    color: #294F8D;
 }
 
 #map {
-    height: 80%; 
-    width: 80%; 
-    float: left;
-}
-
-#image_popup{
-    width: 50%;
-    display: block;
-    margin: auto;    
-}
-
-#text_popup{
-    font-family: "Trebuchet MS", Verdana, sans-serif;
-    text-align: left;
-}
-
-#charte{
-    height: 70%;
-    position: absolute;
-    right: 0%;
-}
-
-#result{
-    display: flex;
-}
-
-#check{
     position: fixed;
-    top: 20%;
-    right: 5%;
-    z-index: 1000;
-    background-color: azure;
+    width: 100vw;
+    height: 100vh;
 }
 
-#check2{
+/* Gestion du style des infos du div de result */
+
+#result {
     position: fixed;
-    top: 30%;
-    right: 5%;
-    z-index: 1000;
-    background-color: azure;
-}
-
-#boutonReinit{
-    position: fixed;
-    top: 15%;
-    right: 5%;
-    z-index: 1000;
-}
-
-#divresult{
-    position: fixed;
-    z-index: 1000;
-    top: 30%;
-    left: 0%;
-    margin-left: 1%;
-    background: azure;
-    width: 30%;
-    height: 50%;
-}
-
-#popup{
-    width: 100%;
-    height: 100%;
-}
-
-h2{
-    text-align: center;
-}
-*/
-
-/*          Vrai CSS refait         */
-
-#map{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-#masthead{
-    position: fixed;
-    top: 0;
     right: 0;
-    left: 0;
-    height: fit-content;
+    top: 0;
+    padding: 30px;
+    border-radius: 15px;
+    margin-right: 50px;
+    margin-top: 25px;
     background-color: white;
-    z-index: 1001;
-    font-family: 'Eczar', arial;
-    padding-bottom: 0.5%;
-    height: 12vh;
+    max-width: 30vw;
+    box-shadow: 0 0 30px -15px  black;
 }
 
-#masthead::after{
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -2vh;
-    height: 2vh;
-    background: url(./images/rough-x-white.svg) repeat-x transparent;
+#titreNomActeurResult {
+    font-family: "Eczar";
+    font-weight: 600;
+    font-size: 26px;
+    margin-bottom: 1%;
 }
-/*
-#titredePage{
-    position: absolute;
-    top: 0;
-    padding-top: 1%;
-    font-size: 50px;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 1%;
-    display: flex;
-    justify-content: center;
-    font-size: 6vmin;
-}
-*/
 
-#titreDePage{
+#structure {
+    font-size: 14px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.expertise {
+    font-size: 14px !important;
+    text-align: left;
+    background-color: #BDB246;
+    border-radius: 15px;
+    color: #fff;
+    padding: 0.05rem 0.5rem 0.1rem 0.5rem;
+    width: fit-content;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.logoLabel {
+    width: 50px;
+    height: auto;
+}
+
+.labelsContainer {
     display: flex;
-    flex-direction: row;
-    width: inherit;
-    justify-content: center;
     align-items: center;
+    justify-content: left;
+    margin-top: 40px;
+}
+.coordonnees {
+    margin-top: 40px;
 }
 
-#titreDePage h1 {
-    font-size: 2vmax;
-}
-
-#logo-site{
-    max-width: 3vmax;
-    max-height: 3vmax;
-    z-index: 1002;
-}
-
-#retourCanographia{
-    max-width: 20vmin;
-    position: fixed;
-    padding-top: 1%;
-    padding-left: 2%;
-    z-index: 1000;
-}
-
-#result{
-    background-color: white;
-    text-align: left;
-    z-index: 1000;
-    border-radius: 5%;
-    border: 1px solid rgb(196,196,196);
-    position: fixed;
-    margin: auto;
-    margin-right: 1vw;
-    font-size: 1.5vmin;
-    right: 5vw;
-    top: 7vh;
-    width: 30vw;
-    display: flex;
-    flex-direction: column;
-}
-
-#divresult{
-    padding-left: 2vw;
-    padding-right: 2vw;
-    width: inherit;
+.iconCoords {
+    color: #BDB246;
+    margin-right: 10px;
+    margin-top: 5px;
 }
 
 .dataToDisplay {
-    font-size: calc(10px + 0.5vmax);
-    text-align: center;
-}
-
-#headerData {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid rgb(196,196,196);
+    justify-content: left;
+    font-size: 16px;
 }
 
-#liensTelechargement{
-    display: flex;
-    align-content: space-between;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 1vh;
-    margin-top: 1vh;
+#signataire {
+    font-style: italic;
+    margin-top: 20px;
+    margin-left: -8px;
+    font-size: 12px;
 }
 
-#charte{
-    max-width: 50;
-}
-
-#titreNom{
-    font-size: calc(10px + 1.5vmax);
-    font-family: 'Eczar', arial;
-    line-height: 40px;
-    text-align: center;
-    margin: 3vh 0 2vh 0;
-}
-
-.lienWeb {
-    opacity: 1;
-}
-
-.lienWeb:hover {
-    opacity: 0.75;
-}
-    
-
-.divDansDiv{
-    margin: auto;
-}
-
-legend{
-    padding: 3px 6px;
-    border-radius: 50%;
-}
-
-#realBody{
-    position: relative;
-    margin-top: 8%;
-    width: 100%;
-    height: 83%;
-}
-
-/*
-#check{
-    position: absolute;
-    top: 18%;
-}
-
-#check2{
-    position: absolute;
-    top: 25%;
-}
-
-#boutonReinit{
-    position: absolute;
-    top: 16%;
-}
-
-#searchInput{
-    position: absolute;
-    top: 50%;
-}
-*/
-h1{
-    font-family: 'Eczar', arial;
-    text-align: justify;
-    padding: 3%;
-}
-
-.notMap{
-    z-index: 1000;
-    height: fit-content;
-    width: 85%;
-    padding: 1%;
-}
-
-.filtreDeroule {
-    max-height: 0;
-    animation: deroule 2s ease forwards;
-}
-
-@keyframes deroule {
-    0%{opacity: 0; display: flex;}
-    100%{max-height: 100vh;}
-}
-
-.filtreRemballe {
-    max-height: 100vh;
-    animation: remballe 0.5s ease forwards;
-}
-
-#iconeCharte {
-    max-width: 50px;
-    max-height: 50px;
-}
-
-@keyframes remballe {
-    0%{max-height: 100vh;}
-    100%{max-height: 0; opacity: 0; display: none }
+#feuilleCharte {
+    transform: rotate(30deg);
+    width: 35px;
 }
 
 .ouvertureResult {
     animation: ouvertureResult 500ms ease-in forwards;
 }
-
 @keyframes ouvertureResult {
     0% {max-width: 0; max-height: 0; opacity: 0;}
     100% {max-width: 100vw; max-height: 100vh; opacity: 1;}
 }
-
 .fermetureResult {
     animation: fermetureResult 500ms ease-out forwards;
 }
-
 @keyframes fermetureResult {
     0%{max-width: 100vw; max-height: 100vh; opacity: 1;}
     100%{max-width: 0; max-height: 0; opacity: 0;}
 }
 
-/* Gestion de l'opacité du marker au hover*/
-.markerHovered {
-    transform: opacity(1);
-    transition-property: transform;
-    transition-duration: 1s;
-    &:hover {
-        transform: scale(1.15);
-    }
-}
-
-.markerHovered {
-    opacity: 0;
-}
-
-#divContainer{
-    width: 90%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    z-index: 1001;
-    color: #FFFFFF;
-    background-color: rgb(252, 250, 250);
-    border-radius: 5%;
-    border: 1px solid rgb(196,196,196);
-    padding: 1%;
-    overflow: scroll;
-    max-height: 55vh;
-    align-items: center;
-    margin: 3vh;
-}
-
-.filtresPopup{
-    border-radius: 10rem;
-    background-color: #BDB246;
-    text-align: center;
-    padding: 5px 15px;
-    margin-bottom: 2px;
-    width: fit-content;
-    color: #FFFFFF;
-    font-style: italic;
-    font-weight: 100;
-    font-size: calc(5px + 0.5vmax);
-}
-
-.iconCharteData {
-    width: 75px;
-    height: 75px;
-}
-
-/*Style du popup à droite*/
-
-h3 {
-    font-weight: 100;
-    opacity: 0.5;
-    font-size: calc(5px + 1vmin);
-}
-
-#footer{
-    position: absolute;
-    bottom: 0;
-
-    font-size: 15px;
-    float: left;
-    background-color: #BDB246;
-    width: 100%;
-    height: 8%;
-    margin-top: 14px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1001;
-}
-
-#footer::after{
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -14px;
-    height: 14px;
-    background: url(./images/rough-x-secondary.svg) repeat-x transparent;
-    z-index: 1001;
-}
-
-#logosFooter{
-    width: 25%;
-    margin: auto;
-}
-
-/*
-label{
-    border-radius: 10rem;
-    background-color: #BDB246;
-    text-align: center;
-    padding: 6px 6px;
-    width: fit-content;
-    font-size: 12px;
-    color: #FFFFFF;
-    font-style: italic;
-    cursor: pointer;
-}
-*/
-
-/* Style des checkboxes*/
-
-.checkboxes {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    padding-left: 2vw;
-}
-
-.divCheckbox {
-    padding-left: 2vw;
-}
-
-.container {
-    cursor: pointer;
-    display: flex;
-    position: relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    color: #000000;
-    font-family: 'Pragmatica';
-    font-weight: 200;
-    font-size: calc(7px + 0.5vmax);
-  
-    opacity: 0.65;
-}
-
-/* Hide the browser's default checkbox */
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1.1vmax;
-    width: 1.1vmax;
-    background-color: #eee;
-    border-radius: 2px;
-    margin-top: 3px;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-    background-color: #ccc;
-}
-  
-  /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-    background-color: #BDB246;
-}
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-  
-  /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-    display: block;
-}
+/* Gestion du CSS du popup on Hover */
 
 .popupOnHover {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-}
-  
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-    left: 6px;
-    top: 3px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
-  
-.container:hover {
-    opacity: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-family: 'Maitree' !important;
 }
 
+.popupTitle {
+    font-family: "Eczar" !important;
+    font-weight: 600;
+    font-size: 16px !important;
+    margin-bottom: 1%;
+    color: #294F8D;
+}
 
-#check{
-    border-bottom: 1px solid rgb(196,196,196);
+.filtresPopup {
+    font-size: 10px !important;
+    text-align: left;
+    background-color: #BDB246;
+    border-radius: 15px;
+    color: #fff;
+    padding: 0.05rem 0.5rem 0.1rem 0.5rem;
+    width: fit-content;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+/* Gestion du CSS du gdDiv */
+
+#bigContainer {
+    position: fixed;
+    background-color: #fff;
+    margin-top: 25px;
+    margin-left: 50px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 465px;
+    box-shadow: 0 0 30px -15px  black;
+}
+
+#titreDePage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Eczar' !important;
+    font-size: 16px !important;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#logo-site {
+    width: 30px;
+    height: auto;
+    margin-right: 15px;
 }
 
 .svg-inline--fa {
     display: var(--fa-display, inline-block);
-    height: 1em;
+    height: 1.3em;
     overflow: visible;
-    vertical-align: -0.125em;
+    vertical-align: -0.2rem;
 }
 
-.deroulant{
+.derouleurCheckboxes {
     background-color: transparent;
-    padding: 15px 10px;
-    font-size: 1vmax;
-
-    /*background-color: #FCE5D2;*/
     border: medium none;
+    cursor: pointer;
+    font-weight: 400 !important;
     opacity: 0.6;
-    transition: all 0.2s ease-in-out 0s;
-    cursor: pointer;
-    text-align: inherit;
-}
-
-.deroulant:hover {opacity: 1}
-
-#boutonReinit{
-    cursor: pointer;
-    border-radius: 3px;
-    align-self: center;
-    height: fit-content;
-    width: fit-content;
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 10px;
-    background-color: #D9D9D9;
-    opacity: 0.75;
-    font-weight: 200;
+    margin-top: 15px;
+    margin-bottom: 15px;
 
-    transition: opacity 0.1s;
-    color: black;
-
-    z-index: 1000;
-    border-radius: 5%;
-    border: 1px solid rgb(196,196,196);
-    font-size: 15px;
+    transition: all 0.2s ease-in-out 0s;
+}
+.titreDerouleur {
+    margin-left: 40px;
+    font-family: 'Maitree';
 }
 
-.leaflet-control {
-    position: fixed;
-    top: 80vh;
-    left: 97vw;
+/* Gestion du CSS des checkboxes */
+
+.checkmark {
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+    border-radius: 2px;
+    position: absolute;
+    left: 61px;
+}
+.checkboxContainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+.checkboxContainer input:checked ~ .checkmark {
+    background-color: #BDB246;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    width: 3px;
+    height: 6px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    left: 5.25px;
+    top: 2.5px;
+}
+.checkboxContainer input:checked ~ .checkmark:after {
+    display: block;
+}
+.svg-inline--fa {
+    display: var(--fa-display, inline-block);
+    height: 1.3em;
+    overflow: visible;
+}
+#iconeCharte {
+    max-width: 40px;
+    height: auto;
+    transform: rotate(30deg);
+    position: absolute;
+    right: 110px;
 }
 
-#gdDiv {
-    width: 20vw;
+.checkboxes {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    font-weight: 275 !important;
+    font-size: 15px;
+    color: black;
+}
+.checkboxContainer {
+    display: flex;
+    justify-content: left;
     align-items: center;
-    position: fixed;
-    top: 7vh;
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid rgb(196,196,196);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-left: 5vw;
-}
-
-#reinit {
-    font-weight: 200;
-    font-size: 1vmax;
-    text-decoration: underline;
-    opacity: 0.75;
+    opacity: 0.65;
     cursor: pointer;
-    margin: 2vh;
+    margin-left: 25px;
+    margin-top: 5px;
 }
-
-#reinit:hover {
+.checkboxContainer:hover {
     opacity: 1;
 }
-
-#reinit:active {
-    color: #681da8;
+.checkboxText {
+    text-align: left;
+    margin-left: 12px;
+}
+#checkContainer {
+    background-color: #FCFAFA;
+    border-radius: 15px;
+    margin-left: 25px;
+    margin-right: 25px;
+    padding: 5px 20px 5px 20px;
+    margin-bottom: 25px;
+    width: 400px;
 }
 
-#boutonReinit:active {
-    /*
-    opacity: 1 !important;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) !important;*/
-    -webkit-animation: fadeinout 0.2s linear forwards;
-    animation: fadeinout 0.2s linear forwards;
+.filtreDeroule {
+    max-height: 0;
+    animation: deroule 0.2s ease-in-out forwards;
+}
+@keyframes deroule {
+    0%{max-height: 0; opacity: 0;}
+    100%{max-height: 50vh; opacity: 1;}
+}
+.filtreRemballe {
+    max-height: 50vh;
+    animation: remballe 0.2s ease-in-out forwards;
+}
+@keyframes remballe {
+    0%{max-height: 50vh; opacity: 1;}
+    100%{max-height: 0; opacity: 0;}
 }
 
-#boutonReinit:hover {
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) !important;
-}
-
-@-webkit-keyframes fadeinout {
-    0%,100% { opacity: 0.75; }
-    50% { opacity: 1; }
-  }
-  
-@keyframes fadeinout {
-    0%,100% { opacity: 0.75; }
-    50% { opacity: 1; }
-}
-.selection {
-
-}
-
-.telechargement {
-    cursor: pointer;
-}
 
 .download_picto {
+    cursor: pointer;
     width: 3vmax;
 }
 
-#onMap {
-    position: fixed;
-    top: 12vh;
-    bottom: 8vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-@media screen and (min-width: 400px) {
-    .container .checkmark::after {
-        left: 0.3vmax;
-        top: 0.1vmax;
-        width: 0.25vmax;
-        height: 0.5vmax;
-    }
-}
-
-@media screen and (min-width: 1920px) {
-    .deroulant {
-        font-size: calc(12px + 0.5vh);
-    }
-    .container {
-        font-size: calc(12px + 0.5vh);
-    }
-    .checkmark {
-        height: 2vh;
-        width: 2vh;
-    }
-
-    .container .checkmark::after {
-        left: 0.6vh;
-        top: 0.2vh;
-        width: 0.5vh;
-        height: 1vh;
-    }
+.leaflet-control-zoom {
+    display: none;
 }
