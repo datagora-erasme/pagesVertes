@@ -10,7 +10,9 @@ go to : [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ## update data
 (install requirements if not already installed)
+
 py main.py
+
 go to : [127.0.0.1:8000/update_data](127.0.0.1:8000/update_data)
 
 
