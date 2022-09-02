@@ -4,7 +4,7 @@
 Cartographie des acteurs de la végétalisation recensés par l'agence d'urbaisme de l'aire métropolitaine lyonnaise
 
 ## running the app
-run pip install -r requirements.txt
+pip install -r requirements.txt
 
 py main.py
 
