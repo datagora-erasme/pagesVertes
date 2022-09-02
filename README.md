@@ -3,6 +3,20 @@
 ## project description
 Cartographie des acteurs de la végétalisation recensés par l'agence d'urbaisme de l'aire métropolitaine lyonnaise
 
+## running the app
+run pip install -r requirements.txt
+py main.py
+go to : [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+## update data
+(install requirements if not already installed)
+py main.py
+go to : [127.0.0.1:8000/update_data](127.0.0.1:8000/update_data)
+
+
+
+
+(((
 ## create a google sheets token with
 You must have access to the google sheets "Outil de sélection des acteurs de la végétalisation"
 
@@ -23,14 +37,4 @@ select JSON
 the JSON file for token is automatically downloaded
 
 put it in the folder of the project and rename it service_account.json
-
-## installing prerequisites
-pip install -r requirements.txt
-
-## running the app
-py app.py
-
-## update data
-delete the JSON files in the folder geojson (not the folder)
-
-the JSON files will be automatically re-created and updated by running app.py
+)))
