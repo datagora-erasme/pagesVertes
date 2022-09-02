@@ -192,6 +192,9 @@ body {
 
     transition: all 0.2s ease-in-out 0s;
 }
+.derouleurCheckboxes:hover {
+    opacity: 1;
+}
 .titreDerouleur {
     margin-left: 40px;
     font-family: 'Roboto';
@@ -314,4 +317,56 @@ body {
 
 #reinit:hover {
     opacity: 0.5;
+}
+
+/* Style du boutn download data */
+
+#download {
+    font-size: 12px;
+    opacity: 0.6;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FCFAFA;
+    border-radius: 10px;
+    padding: 7px 12px 7px 12px;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+#iconDownload {
+    margin-right: 15px;
+}
+
+#download:hover {
+    opacity: 1;
+}
+
+#download:active{
+    box-shadow: inset 0px 1px 4px rgba(0,0,0,0.25);
+}
+
+#webLink {
+    font-size: 12px;
+    width: fit-content;
+    opacity: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FCFAFA;
+    border-radius: 10px;
+    padding: 7px 12px 7px 12px;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+#webLink:hover {
+    opacity: 0.6;
+}
+#webLink:active{
+    box-shadow: inset 0px 1px 4px rgba(0,0,0,0.25);
 }

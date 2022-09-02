@@ -7,6 +7,7 @@ const acteurs = data['features']
 
 // layerAffiche est le layerGroup (variable) contenant les markers à afficher
 let layerAffiche = L.layerGroup()
+let tempLayer = L.layerGroup()
 
 // Récupération des filtres
 const domaines = [
@@ -45,12 +46,11 @@ const checkboxes = document.querySelectorAll('input[type=checkbox]')
 checkboxes.forEach(checkbox => {
   checkbox.addEventListener('change', checkCheckboxesChecked)
 });
-/*
-document.getElementById("downloadCSV").addEventListener("click", function(){
+
+document.getElementById("download").addEventListener("click", function(){
   console.log("Téléchargement du CSV")
   createCSV(getDataCSV());
 });
-*/
 map.addEventListener('click', animationFermetureResult)
 
 
@@ -177,7 +177,7 @@ function drawMarkerData() {
     }
   });
   html += '<div class="coordonnees">'
-  if (this.data["Site web"]) {html += '<a target="_blank" class="dataToDisplay coordonnee" href="' + this.data["Site web"] + '"><iconify-icon icon="mdi:web" width="20" height="20" class="iconCoords"></iconify-icon>Site web</a>'}
+  if (this.data["Site web"]) {html += '<a target="_blank" class="dataToDisplay coordonnee" id="webLink" href="' + this.data["Site web"] + '"><iconify-icon icon="mdi:web" width="20" height="20" class="iconCoords"></iconify-icon>Site web</a>'}
   if (this.data["Email"]){html += '<div class="dataToDisplay coordonnee"><iconify-icon icon="ic:twotone-alternate-email" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Email"] + '</div>'}
   if (this.data["Téléphone"]){html += '<div class="DataToDisplay coordonnee"><iconify-icon icon="carbon:phone" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Téléphone"] + '</div>'}
   html += '<div class="dataToDisplay coordonnee"><iconify-icon icon="ep:position" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Adresse"] + '</div>'
@@ -239,7 +239,8 @@ function checkCheckboxesChecked() {
   console.log("traçage des markers")
 
   // Efface tous les markers affichés (supprime aussi tous les élément de layerAffiche)
-  map.removeLayer(layerAffiche)
+  map.removeLayer(tempLayer)
+  tempLayer.clearLayers()
   layerAffiche.clearLayers()
   let noCheckboxChecked = true
   // TODO : gérer enlever la surbrillance des markers cliqués qd on modifie une checkbox
@@ -259,7 +260,23 @@ function checkCheckboxesChecked() {
       checkGroupeCheckbox(domaine)
     });
   }
-  layerAffiche.addTo(map)
+
+  // vider les doublons de layerAffiche
+  let nomsActeurs = []
+  for (Groupe in layerAffiche._layers) {
+    for (element in layerAffiche._layers[Groupe]._layers) {
+      console.log("layer : ", layerAffiche._layers[Groupe]._layers[element])
+      e = layerAffiche._layers[Groupe]._layers[element]
+      if (!(nomsActeurs.includes(e.data["Nom de l'acteur"]))) {
+        console.log("Nom de l'acteur : ", e.data["Nom de l'acteur"])
+        e.addTo(tempLayer)
+        nomsActeurs.push(e.data["Nom de l'acteur"])
+      }
+    }
+  }
+  console.log("layerAffiche : ", layerAffiche)
+  console.log("tempLayer : ", tempLayer)
+  tempLayer.addTo(map)
 }
 
 
@@ -310,6 +327,54 @@ function reinitCheckboxes () {
 
 function getDataCSV () {
 
+  const headers = [
+    [
+      "Nom de l'acteur",
+      "Email",
+      "Téléphone",
+      "Commentaire sur l'offre de la structure",
+      "Site web",
+      "Adresse",
+      "Label Plante Bleue",
+      "Marque Végétal local",
+      "Signataire de la Charte de l'Arbre",
+      "Type de structure",
+      "Apprendre à jardiner et me former à l’écologie",
+      "Concevoir mon futur espace végétalisé",
+      "Planter et entretenir mes espaces verts",
+      "M’approvisionner en végétaux et en semences",
+      "Connaître la végétation sur mon terrain"
+    ]
+  ]
+
+  let dataCSV = []
+  layerGroups = layerAffiche['_layers'];
+  for (truc in layerGroups) {
+    //console.log(layerGroups[truc]);
+    machin = layerGroups[truc]['_layers'];
+    for (muche in machin) {
+      dataCSV.push(machin[muche].data);
+    }
+  }
+
+  dataCSV.forEach(line => {
+    let temp = [];
+    headers[0].forEach(info => {
+      temp.push(line[info]);
+    });
+    // Attention aller chercher dans le tableau domaine ces trucs là
+    domaines.forEach(domaine => {
+      temp.push(line[domaine])
+    });
+    // temp.push(line["domaines"]);
+    headers.push(temp);
+  });
+
+
+  return headers
+  // renvoie un tableau de tableau
+  // 1ere ligne : en-têtes du CSV
+  // autres lignes : données
 }
 
 
@@ -371,6 +436,26 @@ function drawMaPosition () {
   }
 
   navigator.geolocation.getCurrentPosition(success, error, options)
+}
+
+
+/**
+ * createCSV lets the user download a CSV file containing the needed data
+ * @param {*} tableauCSV 
+ */
+function createCSV (tableauCSV) {
+  let csvContent = "data:text/csv;charset=utf-8,";
+
+  tableauCSV.forEach(rowArray => {
+    let row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
+  let encodedUri = encodeURI(csvContent);
+  let link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "liste_acteurs.csv");
+  document.body.appendChild(link); 
+  link.click();
 }
 
 
