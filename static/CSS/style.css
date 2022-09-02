@@ -1,6 +1,6 @@
 body {
     background-color: #FCE5D2;
-    font-family: 'Maitree', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     margin: 0;
     padding: 0;
@@ -117,7 +117,7 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 15px;
-    font-family: 'Maitree' !important;
+    font-family: 'Roboto' !important;
 }
 
 .popupTitle {
@@ -194,7 +194,7 @@ body {
 }
 .titreDerouleur {
     margin-left: 40px;
-    font-family: 'Maitree';
+    font-family: 'Roboto';
 }
 
 /* Gestion du CSS des checkboxes */
@@ -301,4 +301,17 @@ body {
 
 .leaflet-control-zoom {
     display: none;
+}
+
+/* Style du bouton réinitialiser les filtres */
+
+#reinit {
+    font-size: 12px;
+    margin-bottom: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#reinit:hover {
+    opacity: 0.5;
 }

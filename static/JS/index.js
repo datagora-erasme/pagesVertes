@@ -10,11 +10,11 @@ let layerAffiche = L.layerGroup()
 
 // Récupération des filtres
 const domaines = [
-  "D’apprendre à jardiner et me former à l’écologie",
+  "Apprendre à jardiner et me former à l’écologie",
   "Concevoir mon futur espace végétalisé",
   "Planter et entretenir mes espaces verts",
   "M’approvisionner en végétaux et en semences",
-  "Connaître la biodiversité sur mon terrain"
+  "Connaître la végétation sur mon terrain"
 ]
 
 // Création des groupes de LayerGroup par labels
@@ -37,10 +37,10 @@ drawMaPosition()
 
 
 // Gestion des évènements du DOM
-/*
+
 const boutonReinit = document.getElementById('reinit')
 boutonReinit.addEventListener("click", reinitCheckboxes)
-*/
+
 const checkboxes = document.querySelectorAll('input[type=checkbox]')
 checkboxes.forEach(checkbox => {
   checkbox.addEventListener('change', checkCheckboxesChecked)
@@ -294,11 +294,16 @@ function checkGroupeCheckbox (domaine) {
  *  the filters when you click on the resetting button
  */
 function reinitCheckboxes () {
-
+  const checkboxesReinit = Array.from(document.querySelectorAll("input[type=checkbox"))
+  checkboxesReinit.forEach(currentCheckbox => {
+    currentCheckbox.checked = false
+  });
+  /*
   domaines.forEach(domaine => {
     currentCheckbox = document.getElementById(domaine)
     currentCheckbox.checked = false
   });
+  */
   checkCheckboxesChecked()
 }
 
