@@ -5,7 +5,9 @@ Cartographie des acteurs de la végétalisation recensés par l'agence d'urbaism
 
 ## running the app
 run pip install -r requirements.txt
+
 py main.py
+
 go to : [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ## update data
