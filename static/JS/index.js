@@ -23,6 +23,9 @@ let groupePlanteBleue = {}
 let groupeVegetalLocal = {}
 let groupeCharte = {}
 let groupe = {}
+// groupe Global contient l'ensemble des acteurs du tableau, même s'ils n'ont pas de filtre
+// donc pas la même structure
+let groupeGlobal = L.layerGroup()
 
 // construit le HTML en fonction des données
 addCheckboxes()
@@ -100,11 +103,14 @@ function createMarkers(){
     let lat = acteur["geometry"]["coordinates"][1]
     let lng = acteur["geometry"]["coordinates"][0]
 
+    let noDomaine = true
+
     domaines.forEach(domaine => {
       //console.log(acteur.properties)
       //console.log("domaine : ", domaine)
       //console.log(acteur.properties[domaine])
       if (acteur.properties[domaine]) {
+        noDomaine = false
         // on teste s'il est signataire de la charte pour lui attribuer une icone
         let currentMarker = undefined
         if (acteur.properties["Signataire de la Charte de l'Arbre"]) {
@@ -128,6 +134,7 @@ function createMarkers(){
           currentMarker.addTo(groupeCharte[domaine])
         }
         currentMarker.addTo(groupe[domaine])
+        currentMarker.addTo(groupeGlobal)
       }
     })
   })
@@ -171,16 +178,17 @@ function drawMarkerData() {
 
   let html = '<div id="titreNomActeurResult">'+ this.data["Nom de l'acteur"] +'</div>'
   html += '<div class="dataToDisplay" id="structure">' + this.data["Type de structure"] + '</div>'
+  html += '<div id="headerExpertise">Je peux contacter cette structure pour : </div>'
   domaines.forEach(domaine => {
     if (this.data[domaine]) {
       html += '<div class="dataToDisplay expertise">' + domaine + '</div>'
     }
   });
   html += '<div class="coordonnees">'
-  if (this.data["Site web"]) {html += '<a target="_blank" class="dataToDisplay coordonnee" id="webLink" href="' + this.data["Site web"] + '"><iconify-icon icon="mdi:web" width="20" height="20" class="iconCoords"></iconify-icon>Site web</a>'}
   if (this.data["Email"]){html += '<div class="dataToDisplay coordonnee"><iconify-icon icon="ic:twotone-alternate-email" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Email"] + '</div>'}
   if (this.data["Téléphone"]){html += '<div class="DataToDisplay coordonnee"><iconify-icon icon="carbon:phone" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Téléphone"] + '</div>'}
   html += '<div class="dataToDisplay coordonnee"><iconify-icon icon="ep:position" width="20" height="20" class="iconCoords"></iconify-icon>' + this.data["Adresse"] + '</div>'
+  if (this.data["Site web"]) {html += '<a target="_blank" class="dataToDisplay coordonnee" id="webLink" href="' + this.data["Site web"] + '">Site web</a>'}
   html += '</div>'
   html += '<div class="labelsContainer">'
   if (this.data["Signataire de la Charte de l'Arbre"]) {html += '<img src="static/CSS/images/logo charte arbre.png" alt="logo Charte de l' + "'" + 'Arbre" class="logoLabel">'}
@@ -261,6 +269,18 @@ function checkCheckboxesChecked() {
     });
   }
 
+  // Tester si à la fois aucune Checkbox de label et de réponse au besoin ne sont cochées
+  // envoyer vraiment tous les markers dans ce cas là (il existe des markers qui n'ont pas l'un ou l'autre)
+  document.querySelectorAll("input[type=checkbox]")
+  let aucuneCheckboxChecked = true
+  document.querySelectorAll("input[type=checkbox]").forEach(e => {
+    if (e.checked) {aucuneCheckboxChecked = false}
+  });
+  if (aucuneCheckboxChecked) {
+    //ajout de l'ensemble des acteurs à la carto
+    groupeGlobal.addTo(layerAffiche)
+  }
+
   // vider les doublons de layerAffiche
   let nomsActeurs = []
   for (Groupe in layerAffiche._layers) {
@@ -274,8 +294,8 @@ function checkCheckboxesChecked() {
       }
     }
   }
-  console.log("layerAffiche : ", layerAffiche)
-  console.log("tempLayer : ", tempLayer)
+  // console.log("layerAffiche : ", layerAffiche)
+  // console.log("tempLayer : ", tempLayer)
   tempLayer.addTo(map)
 }
 
@@ -348,7 +368,8 @@ function getDataCSV () {
   ]
 
   let dataCSV = []
-  layerGroups = layerAffiche['_layers'];
+  layerGroups = tempLayer['_layers'];
+  /*
   for (truc in layerGroups) {
     //console.log(layerGroups[truc]);
     machin = layerGroups[truc]['_layers'];
@@ -356,21 +377,30 @@ function getDataCSV () {
       dataCSV.push(machin[muche].data);
     }
   }
+  */
+
+  for (m in layerGroups) {
+    dataCSV.push(layerGroups[m].data)
+  }
 
   dataCSV.forEach(line => {
     let temp = [];
     headers[0].forEach(info => {
-      temp.push(line[info]);
+      console.log("line[info]", line[info])
+      if (line[info] == undefined) {temp.push("")}
+      else {temp.push(line[info].replaceAll("\n", ",").replaceAll("\r",""))}
     });
     // Attention aller chercher dans le tableau domaine ces trucs là
+    /*
     domaines.forEach(domaine => {
       temp.push(line[domaine])
     });
+    */
     // temp.push(line["domaines"]);
     headers.push(temp);
   });
 
-
+  console.log("headers : ", headers)
   return headers
   // renvoie un tableau de tableau
   // 1ere ligne : en-têtes du CSV
@@ -444,18 +474,62 @@ function drawMaPosition () {
  * @param {*} tableauCSV 
  */
 function createCSV (tableauCSV) {
-  let csvContent = "data:text/csv;charset=utf-8,";
+  // let csvContent = "data:text/csv;charset=utf-8,";
+  let csvContent = ""
+  let csvArray = []
+
+  tableauCSV.forEach(row => {
+    let newline = ""
+    csvArray.push(row)
+    csvArray.push("\n")
+  });
 
   tableauCSV.forEach(rowArray => {
+    // console.log(rowArray)
+    let newcsvline = ""
+    rowArray.forEach(cell => {
+      console.log(cell)
+      newcsvline += cell + ";"
+    })
+    // console.log(newcsvline)
+    csvContent += newcsvline + "\n"
+    /*
     let row = rowArray.join(",");
     csvContent += row + "\r\n";
+    */
   });
+  console.log(csvContent)
+  let file = new File([csvContent], "liste_acteurs.csv")
+  downloadFile(file)
+  /*
   let encodedUri = encodeURI(csvContent);
+  console.log("encodeURI : ", csvContent)
   let link = document.createElement("a");
-  link.setAttribute("href", encodedUri);
+  link.setAttribute("href", csvContent);
   link.setAttribute("download", "liste_acteurs.csv");
   document.body.appendChild(link); 
   link.click();
+  */
+
+}
+
+function downloadFile(file) {
+  // Create a link and set the URL using `createObjectURL`
+  const link = document.createElement("a");
+  link.style.display = "none";
+  link.href = URL.createObjectURL(file);
+  link.download = file.name;
+
+  // It needs to be added to the DOM so it can be clicked
+  document.body.appendChild(link);
+  link.click();
+
+  // To make this work on Firefox we need to wait
+  // a little while before removing it.
+  setTimeout(() => {
+    URL.revokeObjectURL(link.href);
+    link.parentNode.removeChild(link);
+  }, 0);
 }
 
 
