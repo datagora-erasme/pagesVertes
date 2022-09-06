@@ -103,27 +103,18 @@ function createMarkers(){
     let lat = acteur["geometry"]["coordinates"][1]
     let lng = acteur["geometry"]["coordinates"][0]
 
-    let noDomaine = true
-
+    // on teste s'il est signataire de la charte pour lui attribuer une icone
+    let currentMarker = undefined
+    if (acteur.properties["Signataire de la Charte de l'Arbre"]) {currentMarker = new L.marker([lat, lng], {icon: iconCharte})}
+    else {currentMarker = new L.marker([lat, lng], {icon: iconEmpty})}
+    // ajout des données et gestion des évènements associés au marker
+    currentMarker.data = acteur["properties"]
+    currentMarker.on('mouseover', drawPopup)
+    currentMarker.on('mouseout', deletePopup)
+    currentMarker.on('click', drawMarkerData)
+    currentMarker.addTo(groupeGlobal)
     domaines.forEach(domaine => {
-      //console.log(acteur.properties)
-      //console.log("domaine : ", domaine)
-      //console.log(acteur.properties[domaine])
       if (acteur.properties[domaine]) {
-        noDomaine = false
-        // on teste s'il est signataire de la charte pour lui attribuer une icone
-        let currentMarker = undefined
-        if (acteur.properties["Signataire de la Charte de l'Arbre"]) {
-          currentMarker = new L.marker([lat, lng], {icon: iconCharte})
-        }
-        else {
-          currentMarker = new L.marker([lat, lng], {icon: iconEmpty})
-        }
-        // ajout des données et gestion des évènements associés au marker
-        currentMarker.data = acteur["properties"]
-        currentMarker.on('mouseover', drawPopup)
-        currentMarker.on('mouseout', deletePopup)
-        currentMarker.on('click', drawMarkerData)
         if (acteur.properties["Label Plante Bleue"]) {
           currentMarker.addTo(groupePlanteBleue[domaine])
         }
@@ -134,7 +125,6 @@ function createMarkers(){
           currentMarker.addTo(groupeCharte[domaine])
         }
         currentMarker.addTo(groupe[domaine])
-        currentMarker.addTo(groupeGlobal)
       }
     })
   })
@@ -278,6 +268,7 @@ function checkCheckboxesChecked() {
   });
   if (aucuneCheckboxChecked) {
     //ajout de l'ensemble des acteurs à la carto
+    layerAffiche.clearLayers()
     groupeGlobal.addTo(layerAffiche)
   }
 
