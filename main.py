@@ -4,11 +4,11 @@ It is used as well to launch the web application, to link the client and data
 but also to launch an update_data method
 """
 
+import os
 import json
 import codecs
-from flask import Flask
-from flask import request
-from flask import render_template
+from flask import Flask, request, render_template
+from dotenv import load_dotenv
 import update_data
 
 def plot_data(data_path):
@@ -48,9 +48,20 @@ def index():
 @app.route('/update_data', methods=['GET', 'POST'])
 def update():
     """ Function that launches the method to update the data """
-    update_data.main()
-    return "Data Updated"
+    if request.method == "POST":
+        pw = request.form["pw"]
+        if pw == password:
+            update_data.main()
+            return render_template("success.html")
+        else:
+            return "<h1>Mauvais mot de passe</h1>"
+    else:
+        return render_template("login.html")
 
 if __name__ == '__main__':
+
+    # loading the password in memory
+    load_dotenv(".env")
+    password = os.getenv("PASSWORD")
     PORT = 8000
     app.run(debug=True, port=PORT, use_reloader=False)

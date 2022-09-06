@@ -181,11 +181,11 @@ function drawMarkerData() {
   if (this.data["Site web"]) {html += '<a target="_blank" class="dataToDisplay coordonnee" id="webLink" href="' + this.data["Site web"] + '">Site web</a>'}
   html += '</div>'
   html += '<div class="labelsContainer">'
-  if (this.data["Signataire de la Charte de l'Arbre"]) {html += '<img src="static/CSS/images/logo charte arbre.png" alt="logo Charte de l' + "'" + 'Arbre" class="logoLabel">'}
-  if (this.data["Marque végétal local"]) {html += '<img src="static/CSS/images/logo-vegetal-local.png" alt="logo Végétal Local" class="logoLabel" id="logoVegetal">'}
-  if (this.data["Label Plante Bleue"]) {html += '<img src="static/CSS/images/plante_bleue.png" alt="logo Plante Bleue" class="logoLabel">'}
+  // if (this.data["Signataire de la Charte de l'Arbre"]) {html += '<img src="static/CSS/images/logo charte arbre.png" alt="logo Charte de l' + "'" + 'Arbre" class="logoLabel">'}
+  if (this.data["Marque végétal local"]) {html += '<a href="https://www.vegetal-local.fr/" target="_blank"><img src="static/CSS/images/logo-vegetal-local.png" alt="logo Végétal Local" class="logoLabel" id="logoVegetal"></a>'}
+  if (this.data["Label Plante Bleue"]) {html += '<a href="https://www.plantebleue.fr/" target="_blank"><img src="static/CSS/images/plante_bleue.png" alt="logo Plante Bleue" class="logoLabel"></a>'}
   html += '</div>'
-  if (this.data["Signataire de la Charte de l'Arbre"]) {html += '<div class="dataToDisplay" id="signataire"><img class="logoLabel" id="feuilleCharte" src="static/CSS/images/iconeCharte.png" alt="logoCharte">Signataire de la charte de l' + "'" + 'arbre</div>'}
+  if (this.data["Signataire de la Charte de l'Arbre"]) {html += '<a class="dataToDisplay" id="signataire" href="https://blogs.grandlyon.com/developpementdurable/en-actions/dispositifs-partenariaux/charte-de-larbre/" target="_blank" style="cursor: pointer; text-decoration: none;"><img class="logoLabel" id="feuilleCharte" src="static/CSS/images/iconeCharte.png" alt="logoCharte">Signataire de la charte de l' + "'" + 'arbre</a>'}
   document.getElementById("result").innerHTML = html
   document.getElementById("result").style.display = "block"
 
