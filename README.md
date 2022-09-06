@@ -17,7 +17,7 @@ py main.py
 
 go to : [127.0.0.1:8000/update_data](127.0.0.1:8000/update_data)
 
-
+enter the password
 
 
 ##  (create a google sheets token with) Optional, for your information
