@@ -15,7 +15,7 @@ go to : [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 py main.py
 
-go to : [127.0.0.1:8000/update_data](127.0.0.1:8000/update_data)
+go to : [127.0.0.1:8000/update_data](http://127.0.0.1:8000/update_data)
 
 enter the password
 
