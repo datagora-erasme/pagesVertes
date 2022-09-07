@@ -49,14 +49,12 @@ def index():
 def update():
     """ Function that launches the method to update the data """
     if request.method == "POST":
-        pw = request.form["pw"]
-        if pw == password:
+        input_pw = request.form["pw"]
+        if input_pw == password:
             update_data.main()
             return render_template("success.html")
-        else:
-            return "<h1>Mauvais mot de passe</h1>"
-    else:
-        return render_template("login.html")
+        return "<h1>Mauvais mot de passe</h1>"
+    return render_template("login.html")
 
 if __name__ == '__main__':
 

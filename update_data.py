@@ -67,7 +67,7 @@ def process_data():
     data_df.replace(np.nan, '', inplace=True)
     return data_df
 
-def main():    
+def main():
     """
     Main execution program
     :return: None
