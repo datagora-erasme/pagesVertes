@@ -170,9 +170,17 @@ body {
     align-items: center;
     justify-content: center;
     font-family: 'Eczar' !important;
-    font-size: 16px !important;
+    font-size: 34px !important;
     margin-left: 25px;
     margin-right: 25px;
+    margin-top: 15px;
+}
+
+#PagesVertes-description {
+    font-family: "Maitree";
+    font-size: 12px;
+    margin-bottom: 15px;
+    font-weight: 200;
 }
 
 #logo-site {
