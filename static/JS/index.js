@@ -39,9 +39,6 @@ checkCheckboxesChecked()
 // Ajoute un marker avec la position de l'utilisateur
 drawMaPosition()
 
-// ajoute la searchBar
-searchBar()
-
 
 // Gestion des évènements du DOM
 
@@ -575,58 +572,6 @@ deroulants.forEach(deroulant => {
         }
     });
 });
-
-
-/**
- * searchBar is the main function that creates the searchBar
- */
-function searchBar () {
-  const searchInput = document.querySelector(".search-input")
-  searchInput.addEventListener("input", search)
-
-  /**
-   * search is a function that takes the string input and checks if it matches with data
-   * @param {string} input 
-   */
-  function search (input) {
-    if (value && value.trim().length > 0) {
-      value = value.trim().toLowerCase()
-      setList(Object.values(groupeGlobal._layers).filter(person => {
-        return person.data["Nom de l'acteur"].toLowerCase().includes(value)
-      }))
-    } else {
-      clearList()
-    }
-  }
-
-  /**
-   * function that creates the HTML with the results
-   * @param {string} results 
-   */
-  function setList (results) {
-    clearList()
-    for (const e of results) {
-        const resultItem = document.createElement('li')
-        resultItem.classList.add('result-item')
-        const text = document.createTextNode(e.data["Nom de l'acteur"])
-        resultItem.appendChild(text)
-        list.appendChild(resultItem)
-    }
-    let listOfResult = Array.from(document.querySelectorAll(".result-item"))
-    listOfResult.forEach(result => {
-        result.addEventListener("click", goToMarker.bind(results))
-    });
-  }
-
-  /**
-   * clearList is a funtion that removes the HTML from the DOM
-   */
-  function clearList () {
-    while (list.firstChild) {
-        list.removeChild(list.firstChild)
-    }
-  }
-}
 
 /**
  * animationOuvertureResult gère l'animation d'ouverture du div de result lors
