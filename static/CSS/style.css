@@ -151,7 +151,7 @@ body {
 
 /* Gestion du CSS du gdDiv */
 
-#bigContainer {
+.bigContainer {
     position: fixed;
     background-color: #fff;
     margin-top: 25px;
@@ -427,4 +427,12 @@ body {
 .headerTooltip {
     font-size: 16px;
     font-weight: 400;
+}
+
+/* Gestion du design responsive */
+
+@media all and (max-width: 400px) {
+    .bigContainer {
+        width: 100vw;
+    }
 }

@@ -62,4 +62,4 @@ if __name__ == '__main__':
     load_dotenv(".env")
     password = os.getenv("PASSWORD")
     PORT = 8000
-    app.run(debug=True, port=PORT, use_reloader=False)
+    app.run(host='0.0.0.0', debug=True, port=PORT, use_reloader=False)
