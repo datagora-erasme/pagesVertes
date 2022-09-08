@@ -429,6 +429,25 @@ body {
     font-weight: 400;
 }
 
+/* Gestion du style de la search bar */
+
+.searchbar-container {
+    position: fixed;
+    top: 10vh;
+    left: 50vw;
+}
+
+.search-result-item {
+    background-color: #ccc;
+    color: black;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 15px;
+
+    cursor: pointer;
+}
+
 /* Gestion du design responsive */
 
 @media all and (max-width: 400px) {
