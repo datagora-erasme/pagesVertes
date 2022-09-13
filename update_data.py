@@ -4,6 +4,7 @@ This method is used to create the data (geoJSON) file used by
 the web application, this method updates the data
 """
 
+import os
 import json
 import requests
 import gspread
@@ -54,7 +55,8 @@ def process_data():
     pandas DataFrame
     """
 
-    service_account = gspread.service_account(filename="service_account.json")
+    credentials = os.environ.get("SERVICE_ACCOUNT")
+    service_account = gspread.service_account_from_dict(credentials)
     sheets = service_account.open("Pages Vertes sheet")
     worksheet = sheets.worksheet("Selection_Liste d'acteurs")
     wks_dict = worksheet.get_all_records()
