@@ -8,14 +8,14 @@ pip install -r requirements.txt
 
 create a .env file containg the password to update data like the .env.example file
 
-py main.py
+`py main.py`
 
 go to : [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ## update data
 (install requirements if not already installed)
 
-py main.py
+`py main.py`
 
 go to : [127.0.0.1:8000/update_data](http://127.0.0.1:8000/update_data)
 
