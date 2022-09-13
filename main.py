@@ -59,6 +59,7 @@ def update():
 if __name__ == '__main__':
 
     # loading the password in memory
+    load_dotenv(".env")
     password = os.environ.get("PASSWORD")
     PORT = 8000
     app.run(host='0.0.0.0', debug=True, port=PORT, use_reloader=False)

@@ -54,8 +54,8 @@ def process_data():
     :return:
     pandas DataFrame
     """
-
-    credentials = os.environ.get("SERVICE_ACCOUNT")
+    
+    credentials = json.loads(os.environ.get("SERVICE_ACCOUNT"))
     service_account = gspread.service_account_from_dict(credentials)
     sheets = service_account.open("Pages Vertes sheet")
     worksheet = sheets.worksheet("Selection_Liste d'acteurs")
