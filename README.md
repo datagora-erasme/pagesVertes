@@ -1,25 +1,27 @@
+
 # pagesVertes
 
 ## project description
-Cartographie des acteurs de la végétalisation recensés par l'agence d'urbaisme de l'aire métropolitaine lyonnaise
+
+Cartographie des acteurs de la végétalisation recensés par l'agence d'urbanisme de l'aire métropolitaine lyonnaise
 
 ## running the app
-pip install -r requirements.txt
 
-create a .env file containg the password to update data like the .env.example file
+`docker run --name pagesvertes -p 8000:8000 erasme/pagesvertes`
 
-`py main.py`
+
 
 go to : [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ## update data
-(install requirements if not already installed)
-
-`py main.py`
 
 go to : [127.0.0.1:8000/update_data](http://127.0.0.1:8000/update_data)
 
-enter the password
+enter the password (in ERASME's bitwarden)
+
+if nothing happens, it worked !
+
+wait for the update (a few minutes)
 
 
 ##  (create a google sheets token with) Optional, for your information
