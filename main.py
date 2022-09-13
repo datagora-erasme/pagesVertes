@@ -48,6 +48,9 @@ def index():
 @app.route('/update_data', methods=['GET', 'POST'])
 def update():
     """ Function that launches the method to update the data """
+    # loading the password in memory
+    load_dotenv(".env")
+    password = os.environ.get("PASSWORD")
     if request.method == "POST":
         input_pw = request.form["pw"]
         if input_pw == password:
@@ -58,8 +61,5 @@ def update():
 
 if __name__ == '__main__':
 
-    # loading the password in memory
-    load_dotenv(".env")
-    password = os.environ.get("PASSWORD")
     PORT = 8000
     app.run(host='0.0.0.0', debug=True, port=PORT, use_reloader=False)
