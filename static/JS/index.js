@@ -2,6 +2,16 @@
  * This is the main script 
  */
 
+
+// Creation of Leaflet Map
+L.mapbox.accessToken = 'pk.eyJ1IjoiYWFuZ2Vsb3QiLCJhIjoiY2twbXQ3aXl5MDUzbDJ2cDRtdTJoMjlvbyJ9.XlluG8Wj1k_QsGstSd62xA';
+let map = L.map('map').setView([45.757814,4.832011], 13);
+
+let OpenStreetMap_HOT = L.tileLayer('https://api.mapbox.com/styles/v1/aangelot/cl38wmscs000214o6biff2xj0/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+maxZoom: 19,
+});
+OpenStreetMap_HOT.addTo(map);
+
 // acteurs est une liste de geoJSON contenant les infos pour tous les acteurs
 const acteurs = data['features']
 
@@ -55,6 +65,11 @@ document.getElementById("download").addEventListener("click", function(){
   createCSV(getDataCSV());
 });
 map.addEventListener('click', animationFermetureResult)
+// ajout de la searchbar à la carto
+map.addControl( new L.Control.Search({
+  layer: groupeGlobal,
+  propertyName: "Nom de l'acteur"
+}).addTo(map))
 
 
 /**
@@ -276,10 +291,10 @@ function checkCheckboxesChecked() {
   let nomsActeurs = []
   for (Groupe in layerAffiche._layers) {
     for (element in layerAffiche._layers[Groupe]._layers) {
-      console.log("layer : ", layerAffiche._layers[Groupe]._layers[element])
+      // console.log("layer : ", layerAffiche._layers[Groupe]._layers[element])
       e = layerAffiche._layers[Groupe]._layers[element]
       if (!(nomsActeurs.includes(e.data["Nom de l'acteur"]))) {
-        console.log("Nom de l'acteur : ", e.data["Nom de l'acteur"])
+        // console.log("Nom de l'acteur : ", e.data["Nom de l'acteur"])
         e.addTo(tempLayer)
         nomsActeurs.push(e.data["Nom de l'acteur"])
       }

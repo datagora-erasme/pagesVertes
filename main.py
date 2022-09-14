@@ -26,7 +26,7 @@ def plot_data(data_path):
         geo_json = json.load(file)
 
     # load the HTML template
-    with codecs.open("templates/index.html", 'r', encoding='utf-8') as file:
+    with codecs.open("templates/index2.html", 'r', encoding='utf-8') as file:
         html = file.read()
 
     # write the JavaScript into the html to link the data to client
