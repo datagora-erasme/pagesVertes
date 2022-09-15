@@ -83,7 +83,7 @@ map.addControl( new L.Control.Search({
  * qui correspondent à un domaine précis
  */
 function createMarkers(){
-
+  
   console.log("en train de créer les markers")
   //Création des différents icônes pour les signataires de la charte de l'arbre ou non
   let iconCharte = L.icon({
