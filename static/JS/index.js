@@ -33,9 +33,47 @@ let groupePlanteBleue = {}
 let groupeVegetalLocal = {}
 let groupeCharte = {}
 let groupe = {}
+let groupeSearch = L.layerGroup()
 // groupe Global contient l'ensemble des acteurs du tableau, même s'ils n'ont pas de filtre
 // donc pas la même structure
 let groupeGlobal = L.layerGroup()
+
+let iconSearch = L.icon({
+  iconUrl: "static/CSS/images/Provenance_purple_charte.png",
+  iconSize: [0, 0],
+  iconAnchor: [15, 30],
+  popupAnchor: [0, 0],
+  shadowUrl: 'static/CSS/images/marker-shadow.png',
+  shadowSize: [0, 0],
+  shadowAnchor: [10, 41],
+})
+
+let iconCharte = L.icon({
+  iconUrl: "static/CSS/images/Provenance_purple_charte.png",
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
+  popupAnchor: [0, 0],
+  shadowUrl: 'static/CSS/images/marker-shadow.png',
+  shadowSize: [41, 41],
+  shadowAnchor: [10, 41],
+})
+
+// ajout des données à groupeSearch
+fetch("static/geojson/data.json")
+.then( (res) => {
+  return res.json()
+})
+.then( (res) => {
+  L.geoJSON(res).addTo(groupeSearch)
+  groupeSearch.eachLayer(function (layer) {
+    layer.eachLayer( function (smallLayer) {
+      console.log(smallLayer)
+      // smallLayer.setOpacity(0)
+      smallLayer.setIcon(iconSearch)
+    })
+  })
+})
+
 
 // construit le HTML en fonction des données
 addCheckboxes()
@@ -65,9 +103,10 @@ document.getElementById("download").addEventListener("click", function(){
   createCSV(getDataCSV());
 });
 map.addEventListener('click', animationFermetureResult)
-// ajout de la searchbar à la carto
+
+// ajout de la searchBar
 map.addControl( new L.Control.Search({
-  layer: groupeGlobal,
+  layer: groupeSearch,
   propertyName: "Nom de l'acteur"
 }).addTo(map))
 

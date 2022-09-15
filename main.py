@@ -43,7 +43,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     """ Function that sends HTML data to Flask """
-    return plot_data('data/geojson/data.json')
+    return plot_data('static/geojson/data.json')
 
 @app.route('/update_data', methods=['GET', 'POST'])
 def update():

@@ -30,6 +30,11 @@
     <!-- Chargement du plugin qui permet d'avoir des icônes -->
     <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
 
+    <!--loading leaflet-search-->
+    <link rel="stylesheet" href="static/node_modules/leaflet-search/src/leaflet-search.css">
+    <script src="static/node_modules/leaflet-search/src/leaflet-search.js"></script>
+
+
     <!--loading javascript code-->
     <script src="static/JS/index.js" defer></script>
 
@@ -38,71 +43,71 @@
 
 <body>
 
-    <div id="map"></div>
-    <div class="bigContainer">
+  <div id="map"></div>
+  <div class="bigContainer">
 
-        <div id="titreDePage">
-            <img src="static/CSS/images/canographia-logo-svg.svg" id="logo-site" alt="logo-site">
-            <div>Pages Vertes</div>
-        </div>
-        <div id="PagesVertes-description">L'annuaire des professionnels de la végétalisation lyonnaise</div>
+      <div id="titreDePage">
+          <img src="static/CSS/images/canographia-logo-svg.svg" id="logo-site" alt="logo-site">
+          <div>Pages Vertes</div>
+      </div>
+      <div id="PagesVertes-description">L'annuaire des professionnels de la végétalisation lyonnaise</div>
 
-        <div id="checkContainer">
+      <div id="checkContainer">
 
-            <div id="check2">
-                <button class="derouleurCheckboxes"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span><div class="titreDerouleur">J'ai besoin de</div></button>
-            </div>
+          <div id="check2">
+              <button class="derouleurCheckboxes"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span><div class="titreDerouleur">J'ai besoin de</div></button>
+          </div>
 
-            <div id="check">
-                <button class="derouleurCheckboxes"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span><div class="titreDerouleur">Labels et engagements éthiques</div></button>
-                <div class="checkboxes" style="display: none;">
-                    <label for="checkboxCharte" class="checkboxContainer tooltip">
-                      <input type="checkbox" id="checkboxCharte">
-                      <div class="checkboxText">Signataires de la Charte de l'arbre</div>
-                      <img src="static/CSS/images/iconeCharte.png" alt="iconeCharte" id="iconeCharte">
-                      <span class="checkmark"></span>
-                      <span class="tooltipText">
-                        <div class="headerTooltip">La Charte de l’Arbre</div>
-                        <div class="textTooltipText">
-                          Portée par la Métropole de Lyon depuis 2011, la Charte de l’arbre fédère plus de 120 structures publiques ou privées autour de valeurs communes et de pratiques de gestion durables des arbres.
-                          <a href="https://blogs.grandlyon.com/developpementdurable/en-actions/dispositifs-partenariaux/charte-de-larbre/" target="_blank">Pour en savoir plus</a>
-                        </div>
-                      </span>
-                    </label>
-                    <label for="checkboxVegetalLocal" class="checkboxContainer tooltip">
-                      <input type="checkbox" id="checkboxVegetalLocal">
-                      <div class="checkboxText">Marque Vegetal Local</div>          
-                      <span class="checkmark"></span>
-                      <span class="tooltipText">
-                        <div class="headerTooltip">La Marque Végétal local</div>
-                        <div class="textTooltipText">
-                          La Marque Végétal local est un outil de traçabilité des végétaux sauvages naturellement présents dans la région d’origine, afin de conserver la diversité génétique végétale et de restaurer les écosystèmes. 
-                          <a href="https://www.vegetal-local.fr/" target="_blank">Pöur en savoir plus</a>
-                        </div>
-                      </span>
-                    </label>
-                    <label for="checkboxPlanteBleue" class="checkboxContainer tooltip">
-                      <input type="checkbox" id="checkboxPlanteBleue">
-                      <div class="checkboxText">Label Plante Bleue</div>
-                      <span class="checkmark"></span>
-                      <span class="tooltipText">
-                        <div class="headerTooltip">Le label Plante bleue</div>
-                        <div class="textTooltipText">
-                          Plante Bleue est la certification nationale de référence garantissant officiellement une production éco-responsable de végétaux par des entreprises de production horticoles ou de pépinière certifiées.
-                          <a href="https://www.plantebleue.fr/" target="_blank">Pöur en savoir plus</a>
-                        </div>
-                      </span>
-                    </label>
-                </div>
-            </div>
+          <div id="check">
+              <button class="derouleurCheckboxes"><span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg></span><div class="titreDerouleur">Labels et engagements éthiques</div></button>
+              <div class="checkboxes" style="display: none;">
+                  <label for="checkboxCharte" class="checkboxContainer tooltip">
+                    <input type="checkbox" id="checkboxCharte">
+                    <div class="checkboxText">Signataires de la Charte de l'arbre</div>
+                    <img src="static/CSS/images/iconeCharte.png" alt="iconeCharte" id="iconeCharte">
+                    <span class="checkmark"></span>
+                    <span class="tooltipText">
+                      <div class="headerTooltip">La Charte de l’Arbre</div>
+                      <div class="textTooltipText">
+                        Portée par la Métropole de Lyon depuis 2011, la Charte de l’arbre fédère plus de 120 structures publiques ou privées autour de valeurs communes et de pratiques de gestion durables des arbres.
+                        <a href="https://blogs.grandlyon.com/developpementdurable/en-actions/dispositifs-partenariaux/charte-de-larbre/" target="_blank">Pour en savoir plus</a>
+                      </div>
+                    </span>
+                  </label>
+                  <label for="checkboxVegetalLocal" class="checkboxContainer tooltip">
+                    <input type="checkbox" id="checkboxVegetalLocal">
+                    <div class="checkboxText">Marque Vegetal Local</div>          
+                    <span class="checkmark"></span>
+                    <span class="tooltipText">
+                      <div class="headerTooltip">La Marque Végétal local</div>
+                      <div class="textTooltipText">
+                        La Marque Végétal local est un outil de traçabilité des végétaux sauvages naturellement présents dans la région d’origine, afin de conserver la diversité génétique végétale et de restaurer les écosystèmes. 
+                        <a href="https://www.vegetal-local.fr/" target="_blank">Pöur en savoir plus</a>
+                      </div>
+                    </span>
+                  </label>
+                  <label for="checkboxPlanteBleue" class="checkboxContainer tooltip">
+                    <input type="checkbox" id="checkboxPlanteBleue">
+                    <div class="checkboxText">Label Plante Bleue</div>
+                    <span class="checkmark"></span>
+                    <span class="tooltipText">
+                      <div class="headerTooltip">Le label Plante bleue</div>
+                      <div class="textTooltipText">
+                        Plante Bleue est la certification nationale de référence garantissant officiellement une production éco-responsable de végétaux par des entreprises de production horticoles ou de pépinière certifiées.
+                        <a href="https://www.plantebleue.fr/" target="_blank">Pöur en savoir plus</a>
+                      </div>
+                    </span>
+                  </label>
+              </div>
+          </div>
 
-        </div>
+      </div>
 
-        <div id="reinit">R&eacute;initialiser les filtres</div>
-        <div id="download"><iconify-icon id="iconDownload" icon="fluent:arrow-download-20-regular" width="20" height="20"></iconify-icon>Je t&eacute;l&eacute;charge la liste d’acteurs de ma sélection </div>
+      <div id="reinit">R&eacute;initialiser les filtres</div>
+      <div id="download"><iconify-icon id="iconDownload" icon="fluent:arrow-download-20-regular" width="20" height="20"></iconify-icon>Je t&eacute;l&eacute;charge la liste d’acteurs de ma sélection </div>
 
-    </div>
+  </div>
 
-    <div id="result" style="display: none;"></div>
+  <div id="result" style="display: none;"></div>
 </body>
 </html>
