@@ -74,6 +74,7 @@ fetch("static/geojson/data.json")
   })
 })
 
+// TODO quand la barre de recherche est cliquée, réafficher soit l'acteur trouvé, soit tous
 
 // construit le HTML en fonction des données
 addCheckboxes()
@@ -107,8 +108,15 @@ map.addEventListener('click', animationFermetureResult)
 // ajout de la searchBar
 map.addControl( new L.Control.Search({
   layer: groupeSearch,
-  propertyName: "Nom de l'acteur"
-}).addTo(map))
+  propertyName: "Nom de l'acteur",
+  textPlaceholder: "Recherchez un acteur ... ",
+  initial: false,
+  delayType: 0
+})
+.addEventListener("search:locationfound", function () {
+  reinitCheckboxes()
+})
+.addTo(map))
 
 
 /**

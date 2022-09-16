@@ -429,6 +429,68 @@ body {
     font-weight: 400;
 }
 
+
+/* style de la searchBox */
+
+.leaflet-control-search {
+    border: none !important;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px;
+    box-shadow: 0 0 30px -15px black;
+}
+
+.search-exp {
+    animation: 0.3s ouvertureSearch !important;
+}
+
+.search-input {
+    border: none !important;
+    font-family: 'Roboto';
+    font-size: 16px;
+    margin-right: 10px !important;
+    font-weight: 200;
+    animation: 0.4s ouvertureInputSearch !important;
+    outline: none;
+}
+
+@keyframes ouvertureSearch {
+    0% { max-width: 120px; min-width: 0;}
+    100% {max-width: 100%;}
+}
+
+@keyframes ouvertureInputSearch {
+    0% { max-width: 0; }
+    50% { max-width: 50%;}
+    100% { max-width: 100%;}
+}
+
+.search-input::placeholder {
+    opacity: 0.2;
+}
+
+.search-cancel {
+    right: 50px !important;
+}
+
+.search-tooltip {
+    animation: 0.4s ouvertureTooltipSearch ease-out;
+}
+
+@keyframes ouvertureTooltipSearch {
+    0% {max-height: 0%;}
+    100% {max-height: 100%}
+}
+
+.search-tip {
+    padding-left: 15px !important;
+}
+
+
 /* Gestion du design responsive */
 
 @media all and (max-width: 400px) {
