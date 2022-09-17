@@ -111,7 +111,8 @@ map.addControl( new L.Control.Search({
   propertyName: "Nom de l'acteur",
   textPlaceholder: "Recherchez un acteur ... ",
   initial: false,
-  delayType: 0
+  delayType: 0,
+  zoom: 16
 })
 .addEventListener("search:locationfound", function () {
   reinitCheckboxes()
