@@ -2,6 +2,8 @@
  * This is the main script 
  */
 
+// TODO
+
 
 // Creation of Leaflet Map
 L.mapbox.accessToken = 'pk.eyJ1IjoiYWFuZ2Vsb3QiLCJhIjoiY2twbXQ3aXl5MDUzbDJ2cDRtdTJoMjlvbyJ9.XlluG8Wj1k_QsGstSd62xA';
