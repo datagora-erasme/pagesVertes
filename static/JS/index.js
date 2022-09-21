@@ -69,7 +69,7 @@ fetch("static/geojson/data.json")
   L.geoJSON(res).addTo(groupeSearch)
   groupeSearch.eachLayer(function (layer) {
     layer.eachLayer( function (smallLayer) {
-      console.log(smallLayer)
+      // console.log(smallLayer)
       // smallLayer.setOpacity(0)
       smallLayer.setIcon(iconSearch)
     })
@@ -281,7 +281,7 @@ function addCheckboxes () {
 
   // ajout des éléments checkboxes au DOM
   checkboxContainer = document.getElementById("check2")
-  htmlFiltres = '<div id="checkboxes" class="checkboxes" style="display: none;">'
+  htmlFiltres = '<div id="checkboxes" class="checkboxes ferme"">'
   domaines.forEach(domaine => {
     htmlFiltres += '<label class="checkboxContainer" for="' + domaine + '"><input type="checkbox" id="'
     htmlFiltres += domaine
@@ -599,44 +599,52 @@ function downloadFile(file) {
 
 // Script principal de gestion des animations
 
-legendes = Array.from(document.getElementsByClassName('derouleurCheckboxes'));
-// Display des filtres à cocher si jamais le truc déroulant est coché 
-legendes.forEach(legende => {
-    legende.addEventListener("click", async function(){
-        console.log("Légende cliquée");
-        let checkboxesAnim = Array.from(legende.parentNode.getElementsByClassName("checkboxes"))[0];
-
-        if (checkboxesAnim.style.display === 'none'){
-            checkboxesAnim.classList.remove("filtreRemballe");
-            checkboxesAnim.style.display = "flex";
-            checkboxesAnim.classList.add("filtreDeroule");
-        }
-        else{
-            checkboxesAnim.classList.remove("filtreDeroule");
-            checkboxesAnim.classList.add("filtreRemballe");
-            // mettre une pause ici
-            await sleep(200);
-            checkboxesAnim.style.display = 'none';
-        };
-    });
-});
-
-
 deroulants = Array.from(document.getElementsByClassName("derouleurCheckboxes"));
 deroulants.forEach(deroulant => {
-    deroulant.deroule = false;
+    deroulant.ouvert = false;
     deroulant.addEventListener("click", function(){
-        if (this.deroule) {
-            this.firstChild.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg>';
-            this.deroule = false;
-        }
-        else {
-            this.firstChild.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" class="svg-inline--fa fa-chevron-down " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>';
-            this.deroule = true;
-            this.parentNode.style = "";
-        }
+      let contenu = this.parentNode.getElementsByClassName("checkboxes")[0]
+      console.log(contenu)
+      if (this.ouvert) {
+        // le déroulant est ouvert, on souhaite donc le fermer
+        this.firstChild.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg>';
+        contenu.classList.remove("ouvert")
+        contenu.classList.add("ferme")
+        this.ouvert = false;
+      }
+      else {
+        // le déroulant est fermé, on souhaite donc l'ouvrir
+        this.firstChild.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" class="svg-inline--fa fa-chevron-down " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>';
+        contenu.classList.remove("ferme")
+        contenu.classList.add("ouvert")
+        this.ouvert = true;
+      }
     });
 });
+
+// Gestion du grand déroulant
+
+deroulantPrincipal = document.querySelector("#titreDePage")
+deroulantPrincipal.ouvert = false
+deroulantPrincipal.addEventListener("click", function () {
+  let contenu = document.querySelector(".content-container")
+  let derouleur = document.querySelector(".derouleur-contenu")
+  console.log(derouleur)
+  if (this.ouvert) {
+    // le déroulant est ouvert, on souhaite donc le fermer
+    derouleur.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg>';
+    contenu.classList.remove("ouvert")
+    contenu.classList.add("ferme")
+    this.ouvert = false;
+  }
+  else {
+    // le déroulant est fermé, on souhaite donc l'ouvrir
+    derouleur.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" class="svg-inline--fa fa-chevron-down " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>';
+    contenu.classList.remove("ferme")
+    contenu.classList.add("ouvert")
+    this.ouvert = true;
+  }
+})
 
 /**
  * animationOuvertureResult gère l'animation d'ouverture du div de result lors

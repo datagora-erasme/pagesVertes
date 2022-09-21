@@ -174,6 +174,7 @@ body {
     margin-left: 25px;
     margin-right: 25px;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 #PagesVertes-description {
@@ -297,23 +298,39 @@ body {
     width: 400px;
 }
 
-.filtreDeroule {
-    max-height: 0;
-    animation: deroule 0.2s ease-in-out forwards;
-}
-@keyframes deroule {
-    0%{max-height: 0; opacity: 0;}
-    100%{max-height: 50vh; opacity: 1;}
-}
-.filtreRemballe {
-    max-height: 50vh;
-    animation: remballe 0.2s ease-in-out forwards;
-}
-@keyframes remballe {
-    0%{max-height: 50vh; opacity: 1;}
-    100%{max-height: 0; opacity: 0;}
+.ouvert {
+    transform: scaleY(1);
+    animation: ouvert 0.1s;
+    max-height: fit-content;
 }
 
+@keyframes ouvert {
+    from {
+        transform: scaleY(0);
+        max-height: 0;
+    }
+    to {
+        transform: scaleY(1);
+        max-height: 120px;
+    }
+}
+
+.ferme {
+    transform: scaleY(0);
+    animation: ferme 0.1s;
+    max-height: 0;
+}
+
+@keyframes ferme {
+    from {
+        transform: scaleY(1);
+        max-height: 120px;
+    }
+    to {
+        transform: scaleY(0);
+        max-height: 0;
+    }
+}
 
 .download_picto {
     cursor: pointer;
@@ -498,6 +515,31 @@ body {
 
 .search-tip {
     padding-left: 15px !important;
+}
+
+/* Gestion du style du contenu du bigContainer */
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.derouleur-contenu {
+    background-color: transparent;
+    border: medium none;
+    cursor: pointer;
+    font-weight: 400 !important;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    transition: all 0.2s ease-in-out 0s;
+}
+.derouleur-contenu:hover {
+    opacity: 1;
 }
 
 
