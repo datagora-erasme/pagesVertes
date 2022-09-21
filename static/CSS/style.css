@@ -537,6 +537,10 @@ body {
     margin-bottom: 15px;
 
     transition: all 0.2s ease-in-out 0s;
+
+    position: absolute;
+    left: 0;
+    margin-left: 30px;
 }
 .derouleur-contenu:hover {
     opacity: 1;
@@ -548,5 +552,20 @@ body {
 @media all and (max-width: 400px) {
     .bigContainer {
         width: 100vw;
+        bottom: 0;
+        margin: auto;
     }
+
+    /*searchbar*/
+    .leaflet-control-search {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+    }
+
+    #result {
+        width: 80vw;
+        margin: 0 2.5vw 0 2.5vw !important;
+    }
+
 }
