@@ -80,7 +80,7 @@ def main():
     #create the geoJSON
     geo_json = df_to_geojson(data_frame)
     #save the geoJSON
-    with open('data/geojson/data.json', 'w', encoding='utf-8') as file:
+    with open('static/geojson/data.json', 'w', encoding='utf-8') as file:
         json.dump(geo_json, file)
 
 if __name__ == '__main__':
