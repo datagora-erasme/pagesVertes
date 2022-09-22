@@ -230,6 +230,14 @@ function deletePopup() {
  * with relevant and detailed data about an actor when you click on its marker
  */
 function drawMarkerData() {
+  // fermeture du déroulant de menu
+  let contenu = document.querySelector(".content-container")
+  let derouleur = document.querySelector(".derouleur-contenu")
+  derouleur.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg>';
+  contenu.classList.remove("ouvert")
+  contenu.classList.add("ferme")
+  this.ouvert = false;
+  deroulantPrincipal.ouvert = false
 
   let html = '<div id="titreNomActeurResult">'+ this.data["Nom de l'acteur"] +'</div>'
   html += '<div class="dataToDisplay" id="structure">' + this.data["Type de structure"] + '</div>'
@@ -639,6 +647,11 @@ deroulantPrincipal.addEventListener("click", function () {
   }
   else {
     // le déroulant est fermé, on souhaite donc l'ouvrir
+    // fermeture du result si on est sur mobile
+    if (window.matchMedia("(max-width: 400px)").matches) {
+      console.log("la fenêtre fait moins de 400px de large")
+      animationFermetureResult()
+    }
     derouleur.innerHTML = '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" class="svg-inline--fa fa-chevron-down " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z"></path></svg>';
     contenu.classList.remove("ferme")
     contenu.classList.add("ouvert")
