@@ -4,12 +4,12 @@ This method is used to create the data (geoJSON) file used by
 the web application, this method updates the data
 """
 
-import os
 import json
 import requests
 import gspread
 import pandas as pd
 import numpy as np
+from dotenv import dotenv_values
 
 def df_to_geojson(dataframe, address='Adresse'):
     """
@@ -55,7 +55,7 @@ def process_data():
     pandas DataFrame
     """
     
-    credentials = json.loads(os.environ.get("SERVICE_ACCOUNT"))
+    credentials = json.loads(dotenv_values()["SERVICE_ACCOUNT"])
     service_account = gspread.service_account_from_dict(credentials)
     sheets = service_account.open("Pages Vertes sheet")
     worksheet = sheets.worksheet("Selection_Liste d'acteurs")
