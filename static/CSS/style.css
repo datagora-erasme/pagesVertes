@@ -297,6 +297,9 @@ body {
     margin-bottom: 25px;
     width: 400px;
 }
+#checkContainer input {
+    visibility: hidden;
+}
 
 .ouvert {
     transform: scaleY(1);
@@ -566,6 +569,20 @@ body {
     #result {
         width: 80vw;
         margin: 0 2.5vw 0 2.5vw !important;
+    }
+
+    #checkContainer {
+        width: auto;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    #iconeCharte {
+        position: unset;
+    }
+
+    .checkboxContainer {
+        margin-left: 0;
     }
 
 }
