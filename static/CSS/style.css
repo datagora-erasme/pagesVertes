@@ -585,4 +585,16 @@ body {
         margin-left: 0;
     }
 
+    .tooltipText {
+        position: fixed !important;
+        top: -60vh !important;
+        left: -2vw !important;
+        margin: 0 !important;
+        right: 0;
+    }
+
+    .textTooltipText {
+        width: auto;
+    }
+
 }
