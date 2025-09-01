@@ -46,3 +46,6 @@ select JSON
 the JSON file for token is automatically downloaded
 
 put it in the folder of the project and rename it service_account.json
+
+
+<!-- Security scan triggered at 2025-09-02 00:10:04 -->
